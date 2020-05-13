@@ -7,7 +7,11 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 
@@ -16,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
 
     Fragment fragment1;
     Fragment fragment2;
+
+    FloatingActionButton fab1, fab2, fab3;
+    Animation fab_open, fab_close, fab_clockwise, fab_anticlockwise;
+    Boolean isFabOpen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +69,33 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
         });
-    }
 
+        fab1 = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        fab2 = (FloatingActionButton) findViewById(R.id.floatingActionButton2);
+        fab3 = (FloatingActionButton) findViewById(R.id.floatingActionButton3);
+        fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+        fab_clockwise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_clockwise);
+        fab_anticlockwise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anticlockwise);
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isFabOpen){
+                    fab3.startAnimation(fab_close);
+                    fab2.startAnimation(fab_close);
+                    fab1.startAnimation(fab_anticlockwise);
+                    fab3.setClickable(false);
+                    fab2.setClickable(false);
+                    isFabOpen = false;
+                }else{
+                    fab3.startAnimation(fab_open);
+                    fab2.startAnimation(fab_open);
+                    fab1.startAnimation(fab_clockwise);
+                    fab3.setClickable(true);
+                    fab2.setClickable(true);
+                    isFabOpen = true;
+                }
+            }
+        });
+    }
 }
