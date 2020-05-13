@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 public class MWriting extends Fragment {
     RecyclerView recyclerView;
+    WritingConstructureAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -21,11 +23,19 @@ public class MWriting extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        WritingConstructureAdapter adapter = new WritingConstructureAdapter();
+        adapter = new WritingConstructureAdapter();
 
         adapter.addItem(new WritingConstructure("첫글", "안녕하세요"));
 
         recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new OnWitingItemClickListener() {
+            @Override
+            public void onItemClick(WritingConstructureAdapter.ViewHolder holder, View view, int position) {
+                WritingConstructure item = (WritingConstructure) adapter.getItem(position);
+                Toast.makeText(getContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return rootView;
     }

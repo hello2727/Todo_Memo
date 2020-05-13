@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 public class MPicture extends Fragment {
     RecyclerView recyclerView;
+    PictureConstructureAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -21,11 +23,19 @@ public class MPicture extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        PictureConstructureAdapter adapter = new PictureConstructureAdapter();
+        adapter = new PictureConstructureAdapter();
 
         adapter.addItem(new PictureConstructure(R.drawable.pleasepicture, "첫글", "안녕하세요"));
 
         recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new OnPictureItemClickListener() {
+            @Override
+            public void onItemClick(PictureConstructureAdapter.ViewHolder holder, View view, int position) {
+                PictureConstructure item = (PictureConstructure) adapter.getItem(position);
+                Toast.makeText(getContext(), item.getPtitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return rootView;
     }

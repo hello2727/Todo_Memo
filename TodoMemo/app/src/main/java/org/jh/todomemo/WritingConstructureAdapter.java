@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class WritingConstructureAdapter extends RecyclerView.Adapter<WritingConstructureAdapter.ViewHolder> {
+public class WritingConstructureAdapter extends RecyclerView.Adapter<WritingConstructureAdapter.ViewHolder> implements OnWitingItemClickListener {
     ArrayList<WritingConstructure> items = new ArrayList<WritingConstructure>();
+
+    OnWitingItemClickListener listener;
 
     @NonNull
     @Override
@@ -19,7 +21,7 @@ public class WritingConstructureAdapter extends RecyclerView.Adapter<WritingCons
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View itemView = inflater.inflate(R.layout.mwriting_item, viewGroup, false);
 
-        return new ViewHolder(itemView);
+        return new ViewHolder(itemView, this);
     }
 
     @Override
@@ -49,15 +51,37 @@ public class WritingConstructureAdapter extends RecyclerView.Adapter<WritingCons
         items.set(position, item);
     }
 
+    public void setOnItemClickListener(OnWitingItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void onItemClick(ViewHolder holder, View view, int position) {
+        if (listener != null) {
+            listener.onItemClick(holder, view, position);
+        }
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         TextView contents;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, final OnWitingItemClickListener listener) {
             super(itemView);
 
             title = itemView.findViewById(R.id.textView);
             contents = itemView.findViewById(R.id.textView2);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+
+                    if (listener != null) {
+                        listener.onItemClick(ViewHolder.this, view, position);
+                    }
+                }
+            });
         }
 
         public void setItem(WritingConstructure item) {

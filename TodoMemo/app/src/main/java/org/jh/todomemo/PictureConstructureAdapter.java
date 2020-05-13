@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class PictureConstructureAdapter extends RecyclerView.Adapter<PictureConstructureAdapter.ViewHolder> {
+public class PictureConstructureAdapter extends RecyclerView.Adapter<PictureConstructureAdapter.ViewHolder> implements OnPictureItemClickListener {
     ArrayList<PictureConstructure> items = new ArrayList<PictureConstructure>();
+
+    OnPictureItemClickListener listener;
 
     @NonNull
     @Override
@@ -20,7 +22,7 @@ public class PictureConstructureAdapter extends RecyclerView.Adapter<PictureCons
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View itemView = inflater.inflate(R.layout.mpicture_item, viewGroup, false);
 
-        return new ViewHolder(itemView);
+        return new ViewHolder(itemView, this);
     }
 
     @Override
@@ -50,17 +52,39 @@ public class PictureConstructureAdapter extends RecyclerView.Adapter<PictureCons
         items.set(position, item);
     }
 
+    public void setOnItemClickListener(OnPictureItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void onItemClick(ViewHolder holder, View view, int position) {
+        if (listener != null) {
+            listener.onItemClick(holder, view, position);
+        }
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView picture;
         TextView ptitle;
         TextView pcontents;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(View itemView, final OnPictureItemClickListener listener) {
             super(itemView);
 
             picture = itemView.findViewById(R.id.imageView);
             ptitle = itemView.findViewById(R.id.ptextView);
             pcontents = itemView.findViewById(R.id.ptextView2);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+
+                    if (listener != null) {
+                        listener.onItemClick(ViewHolder.this, view, position);
+                    }
+                }
+            });
 
         }
 
