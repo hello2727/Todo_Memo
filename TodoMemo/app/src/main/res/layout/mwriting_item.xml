@@ -32,6 +32,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="본문"
                 android:textSize="14sp" />
         </LinearLayout>
