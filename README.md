@@ -4,6 +4,7 @@
 ## 2. 환경설정
 - Build.gradle(module)
 ```
+//리사이클러뷰, 카드뷰
 implementation 'com.google.android.material:material:1.1.0'
 ```
 - Manifest
