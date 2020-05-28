@@ -9,5 +9,8 @@ implementation 'com.google.android.material:material:1.1.0'
 ```
 - Manifest
 ```
-
+//상단 탭 폰트 설정
+<meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 ```
