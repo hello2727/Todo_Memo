@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import org.jh.todomemo.data.PictureConstructure;
+
 public class MPicture extends Fragment {
     RecyclerView recyclerView;
     PictureConstructureAdapter adapter;

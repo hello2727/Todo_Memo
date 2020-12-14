@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import org.jh.todomemo.R;
+
 public class SubPreviewWriting extends AppCompatActivity {
     TextView previewWTitle, previewWContents;
 

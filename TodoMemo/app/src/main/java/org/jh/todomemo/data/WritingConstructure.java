@@ -1,4 +1,4 @@
-package org.jh.todomemo;
+package org.jh.todomemo.data;
 
 public class WritingConstructure {
     String title;
