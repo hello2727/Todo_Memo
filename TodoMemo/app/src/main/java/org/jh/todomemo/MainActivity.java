@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -100,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
         fab3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                Intent createWritingMemo = new Intent(getApplicationContext(), CreateWritingMemo.class);
+                startActivity(createWritingMemo);
             }
         });
     }
