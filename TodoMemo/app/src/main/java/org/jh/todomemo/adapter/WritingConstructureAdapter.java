@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.jh.todomemo.OnWitingItemClickListener;
+import org.jh.todomemo.listener.OnWitingItemClickListener;
 import org.jh.todomemo.R;
 import org.jh.todomemo.data.WritingConstructure;
 

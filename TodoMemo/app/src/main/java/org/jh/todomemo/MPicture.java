@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import org.jh.todomemo.adapter.PictureConstructureAdapter;
 import org.jh.todomemo.data.PictureConstructure;
+import org.jh.todomemo.listener.OnPictureItemClickListener;
 
 public class MPicture extends Fragment {
     RecyclerView recyclerView;

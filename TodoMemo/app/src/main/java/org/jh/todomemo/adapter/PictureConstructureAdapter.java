@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.jh.todomemo.OnPictureItemClickListener;
+import org.jh.todomemo.listener.OnPictureItemClickListener;
 import org.jh.todomemo.R;
 import org.jh.todomemo.data.PictureConstructure;
 
@@ -67,7 +67,7 @@ public class PictureConstructureAdapter extends RecyclerView.Adapter<PictureCons
         }
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView picture;
         TextView ptitle;
         TextView pcontents;

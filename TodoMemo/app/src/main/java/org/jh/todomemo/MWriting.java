@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import org.jh.todomemo.adapter.WritingConstructureAdapter;
 import org.jh.todomemo.data.WritingConstructure;
+import org.jh.todomemo.listener.OnWitingItemClickListener;
 
 public class MWriting extends Fragment {
     RecyclerView recyclerView;
