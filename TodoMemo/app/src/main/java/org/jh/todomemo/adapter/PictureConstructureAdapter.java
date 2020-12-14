@@ -1,34 +1,37 @@
-package org.jh.todomemo;
+package org.jh.todomemo.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.jh.todomemo.data.WritingConstructure;
+import org.jh.todomemo.OnPictureItemClickListener;
+import org.jh.todomemo.R;
+import org.jh.todomemo.data.PictureConstructure;
 
 import java.util.ArrayList;
 
-public class WritingConstructureAdapter extends RecyclerView.Adapter<WritingConstructureAdapter.ViewHolder> implements OnWitingItemClickListener {
-    ArrayList<WritingConstructure> items = new ArrayList<WritingConstructure>();
+public class PictureConstructureAdapter extends RecyclerView.Adapter<PictureConstructureAdapter.ViewHolder> implements OnPictureItemClickListener {
+    ArrayList<PictureConstructure> items = new ArrayList<PictureConstructure>();
 
-    OnWitingItemClickListener listener;
+    OnPictureItemClickListener listener;
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View itemView = inflater.inflate(R.layout.mwriting_item, viewGroup, false);
+        View itemView = inflater.inflate(R.layout.mpicture_item, viewGroup, false);
 
         return new ViewHolder(itemView, this);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        WritingConstructure item = items.get(position);
+        PictureConstructure item = items.get(position);
         viewHolder.setItem(item);
     }
 
@@ -37,23 +40,23 @@ public class WritingConstructureAdapter extends RecyclerView.Adapter<WritingCons
         return items.size();
     }
 
-    public void addItem(WritingConstructure item) {
+    public void addItem(PictureConstructure item) {
         items.add(item);
     }
 
-    public void setItems(ArrayList<WritingConstructure> items) {
+    public void setItems(ArrayList<PictureConstructure> items) {
         this.items = items;
     }
 
-    public WritingConstructure getItem(int position) {
+    public PictureConstructure getItem(int position) {
         return items.get(position);
     }
 
-    public void setItem(int position, WritingConstructure item) {
+    public void setItem(int position, PictureConstructure item) {
         items.set(position, item);
     }
 
-    public void setOnItemClickListener(OnWitingItemClickListener listener) {
+    public void setOnItemClickListener(OnPictureItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -65,14 +68,16 @@ public class WritingConstructureAdapter extends RecyclerView.Adapter<WritingCons
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title;
-        TextView contents;
+        ImageView picture;
+        TextView ptitle;
+        TextView pcontents;
 
-        public ViewHolder(View itemView, final OnWitingItemClickListener listener) {
+        public ViewHolder(View itemView, final OnPictureItemClickListener listener) {
             super(itemView);
 
-            title = itemView.findViewById(R.id.textView);
-            contents = itemView.findViewById(R.id.textView2);
+            picture = itemView.findViewById(R.id.imageView);
+            ptitle = itemView.findViewById(R.id.ptextView);
+            pcontents = itemView.findViewById(R.id.ptextView2);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,11 +89,13 @@ public class WritingConstructureAdapter extends RecyclerView.Adapter<WritingCons
                     }
                 }
             });
+
         }
 
-        public void setItem(WritingConstructure item) {
-            title.setText(item.getTitle());
-            contents.setText(item.getContents());
+        public void setItem(PictureConstructure item) {
+            picture.setImageResource(item.getPicture());
+            ptitle.setText(item.getPtitle());
+            pcontents.setText(item.getPcontents());
         }
     }
 }

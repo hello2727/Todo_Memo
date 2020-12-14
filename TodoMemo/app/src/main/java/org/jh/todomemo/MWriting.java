@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import org.jh.todomemo.adapter.WritingConstructureAdapter;
 import org.jh.todomemo.data.WritingConstructure;
 
 public class MWriting extends Fragment {
