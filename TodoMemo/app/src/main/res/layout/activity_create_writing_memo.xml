@@ -27,27 +27,6 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <EditText
-        android:id="@+id/cwm_insertTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="20dp"
-        android:hint="제목"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:fontFamily="@font/vollkorn_italic" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
-        android:background="#BDBABA" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,13 +39,25 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/cwm_insertTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="제목"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/vollkorn_italic" />
+            <EditText
                 android:id="@+id/cwm_insertContents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
                 android:hint="메모 내용"
                 android:textColor="#3C3A3A"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:background="@null" />
         </LinearLayout>
     </ScrollView>
 
