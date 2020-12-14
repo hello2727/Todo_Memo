@@ -66,7 +66,7 @@ public class WritingConstructureAdapter extends RecyclerView.Adapter<WritingCons
         }
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         TextView contents;
 
