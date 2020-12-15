@@ -20,6 +20,6 @@ public interface writingMemoDao {
     @Delete
     public void deleteWritingMemos(writingMemo... writingMemos);
 
-    @Query("SELECT :position FROM writingMemo")
+    @Query("SELECT writing_Title, writing_content FROM writingMemo WHERE `index` = :position")
     public writingMemo[] loadWritingMemo(int position);
 }
