@@ -25,6 +25,6 @@ public interface writingMemoDao {
     @Query("SELECT * FROM writingMemo")
     List<writingMemo> getAllMemo();
 
-    @Query("SELECT writing_Title, writing_content FROM writingMemo WHERE `index` = :position")
-    public writingMemo[] loadWritingMemo(int position);
+    @Query("SELECT writing_Title, writing_content FROM writingMemo WHERE writing_Title = :wTitle")
+    public writingMemo[] loadWritingMemo(String wTitle);
 }

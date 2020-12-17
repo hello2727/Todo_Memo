@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class writingMemo {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int index;
 
     @ColumnInfo(name = "writing_Title")
