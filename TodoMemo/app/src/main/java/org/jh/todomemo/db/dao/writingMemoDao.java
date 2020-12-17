@@ -9,6 +9,8 @@ import androidx.room.Update;
 
 import org.jh.todomemo.db.entity.writingMemo;
 
+import java.util.List;
+
 @Dao
 public interface writingMemoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -19,6 +21,9 @@ public interface writingMemoDao {
 
     @Delete
     public void deleteWritingMemos(writingMemo... writingMemos);
+
+    @Query("SELECT * FROM writingMemo")
+    List<writingMemo> getAllMemo();
 
     @Query("SELECT writing_Title, writing_content FROM writingMemo WHERE `index` = :position")
     public writingMemo[] loadWritingMemo(int position);
