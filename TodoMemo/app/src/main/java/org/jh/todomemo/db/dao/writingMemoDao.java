@@ -14,17 +14,17 @@ import java.util.List;
 @Dao
 public interface writingMemoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insertWritingMemos(writingMemo... writingMemos);
+    void insertWritingMemos(writingMemo... writingMemos);
 
     @Update
-    public void updateWritingMemos(writingMemo... writingMemos);
+    void updateWritingMemos(writingMemo... writingMemos);
 
     @Delete
-    public void deleteWritingMemos(writingMemo... writingMemos);
+    void deleteWritingMemos(writingMemo... writingMemos);
 
-    @Query("SELECT * FROM writingMemo")
+    @Query("SELECT * FROM writingMemo_table")
     List<writingMemo> getAllMemo();
 
-    @Query("SELECT writing_Title, writing_content FROM writingMemo WHERE writing_Title = :wTitle")
-    public writingMemo[] loadWritingMemo(String wTitle);
+    @Query("SELECT * FROM writingMemo_table WHERE writing_Title = :wTitle AND writing_content = :content")
+    writingMemo[] loadWritingMemo(String wTitle, String content);
 }
