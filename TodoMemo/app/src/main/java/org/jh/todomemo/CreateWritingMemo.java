@@ -29,6 +29,6 @@ public class CreateWritingMemo extends AppCompatActivity {
 
     /* 글메모 DB에 메모 저장 */
     public void saveDB(writingMemoDatabase db, Editable title, Editable content){
-        db.writingMemoDao().insertWritingMemos();
+//        db.writingMemoDao().insertWritingMemos();
     }
 }
