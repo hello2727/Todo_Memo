@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import org.jh.todomemo.adapter.WritingConstructureAdapter;
 import org.jh.todomemo.data.WritingConstructure;
-import org.jh.todomemo.listener.OnWitingItemClickListener;
+import org.jh.todomemo.listener.OnWritingItemClickListener;
 
 public class MWriting extends Fragment {
     RecyclerView recyclerView;
@@ -26,24 +26,24 @@ public class MWriting extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new WritingConstructureAdapter();
-
-        adapter.addItem(new WritingConstructure("첫글", "안녕하세요, 여러분들 만나뵈서 반갑습니다. 이거 줄 1개만 있는거 맞죠?? 확인차 여쭤봅니다."));
-
-        recyclerView.setAdapter(adapter);
-
-        adapter.setOnItemClickListener(new OnWitingItemClickListener() {
-            @Override
-            public void onItemClick(WritingConstructureAdapter.ViewHolder holder, View view, int position) {
-                WritingConstructure item = (WritingConstructure) adapter.getItem(position);
-                Toast.makeText(getContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(getContext(), SubPreviewWriting.class);
-                intent.putExtra("wtitle", item.getTitle());
-                intent.putExtra("wcontents", item.getContents());
-                startActivity(intent);
-            }
-        });
+//        adapter = new WritingConstructureAdapter();
+//
+//        adapter.addItem(new WritingConstructure("첫글", "안녕하세요, 여러분들 만나뵈서 반갑습니다. 이거 줄 1개만 있는거 맞죠?? 확인차 여쭤봅니다."));
+//
+//        recyclerView.setAdapter(adapter);
+//
+//        adapter.setOnItemClickListener(new OnWritingItemClickListener() {
+//            @Override
+//            public void onItemClick(WritingConstructureAdapter.ViewHolder holder, View view, int position) {
+//                WritingConstructure item = (WritingConstructure) adapter.getItem(position);
+//                Toast.makeText(getContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+//
+//                Intent intent = new Intent(getContext(), SubPreviewWriting.class);
+//                intent.putExtra("wtitle", item.getTitle());
+//                intent.putExtra("wcontents", item.getContents());
+//                startActivity(intent);
+//            }
+//        });
 
         return rootView;
     }
