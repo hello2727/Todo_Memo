@@ -23,7 +23,8 @@ public class MWriting extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_m_writing, container, false);
 
         recyclerView = rootView.findViewById(R.id.recyclerViewWriting);
-
+        adapter = new WritingConstructureAdapter(getContext());
+        recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 //        adapter = new WritingConstructureAdapter();

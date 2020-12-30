@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jh.todomemo.MWriting;
 import org.jh.todomemo.db.entity.writingMemo;
 import org.jh.todomemo.listener.OnWritingItemClickListener;
 import org.jh.todomemo.R;
@@ -50,7 +51,7 @@ public class WritingConstructureAdapter extends RecyclerView.Adapter<WritingCons
     private final LayoutInflater mInflater;
     private List<writingMemo> mWritingMemos;
 
-    WritingConstructureAdapter(Context context) {
+    public WritingConstructureAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
     }
 
