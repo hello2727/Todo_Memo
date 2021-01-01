@@ -23,6 +23,11 @@ public class writingMemo {
         this.ID = ID;
     }
 
+    public writingMemo(String writingTitle, String writingContent){
+        this.writingTitle = writingTitle;
+        this.writingContent = writingContent;
+    }
+
     public String getWritingTitle() {
         return writingTitle;
     }

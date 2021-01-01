@@ -2,26 +2,18 @@ package org.jh.todomemo;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import org.jh.todomemo.ViewModel.writingMemoViewModel;
 import org.jh.todomemo.adapter.WritingConstructureAdapter;
-import org.jh.todomemo.data.WritingConstructure;
 import org.jh.todomemo.db.entity.writingMemo;
-import org.jh.todomemo.listener.OnWritingItemClickListener;
-
 import java.util.List;
 
 public class MWriting extends Fragment {
@@ -70,7 +62,6 @@ public class MWriting extends Fragment {
 //                startActivity(intent);
 //            }
 //        });
-
         return rootView;
     }
 }

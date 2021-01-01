@@ -31,7 +31,7 @@ public class CreateWritingMemo extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent replyIntent = new Intent(CreateWritingMemo.this, MWriting.class);
+        Intent replyIntent = new Intent();
         if(TextUtils.isEmpty(cwm_previewWTitle.getText()) && TextUtils.isEmpty(cwm_previewWContents.getText())) {
             setResult(RESULT_CANCELED, replyIntent);
         }else{
