@@ -24,7 +24,7 @@ public class writingMemoViewModel extends AndroidViewModel {
         mAllWritingMemos = mwritingMemoRepository.getAllWritingMemos();
     }
 
-    LiveData<List<writingMemo>> getAllWritingMemos() {
+    public LiveData<List<writingMemo>> getAllWritingMemos() {
         return mAllWritingMemos;
     }
 

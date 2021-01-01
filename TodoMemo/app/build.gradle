@@ -44,4 +44,9 @@ dependencies {
     implementation "androidx.room:room-guava:$room_version"
     // optional - Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+
+    /*ViewModel과 liveData*/
+    def lifecycle_version = "2.0.0"
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
 }

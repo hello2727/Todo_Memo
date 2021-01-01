@@ -77,7 +77,7 @@ public class WritingConstructureAdapter extends RecyclerView.Adapter<WritingCons
 //        viewHolder.setItem(item);
     }
 
-    void setWritingMemos(List<writingMemo> writingMemos) {
+    public void setWritingMemos(List<writingMemo> writingMemos) {
         mWritingMemos = writingMemos;
         notifyDataSetChanged();
     }
