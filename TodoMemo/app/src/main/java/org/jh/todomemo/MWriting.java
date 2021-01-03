@@ -1,6 +1,5 @@
 package org.jh.todomemo;
 
-import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -8,13 +7,18 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import org.jh.todomemo.ViewModel.writingMemoViewModel;
 import org.jh.todomemo.adapter.WritingConstructureAdapter;
 import org.jh.todomemo.db.entity.writingMemo;
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 public class MWriting extends Fragment {
     RecyclerView recyclerView;
@@ -44,12 +48,6 @@ public class MWriting extends Fragment {
             }
         });
 
-//        adapter = new WritingConstructureAdapter();
-//
-//        adapter.addItem(new WritingConstructure("첫글", "안녕하세요, 여러분들 만나뵈서 반갑습니다. 이거 줄 1개만 있는거 맞죠?? 확인차 여쭤봅니다."));
-//
-//        recyclerView.setAdapter(adapter);
-//
 //        adapter.setOnItemClickListener(new OnWritingItemClickListener() {
 //            @Override
 //            public void onItemClick(WritingConstructureAdapter.ViewHolder holder, View view, int position) {
