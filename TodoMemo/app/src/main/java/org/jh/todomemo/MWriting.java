@@ -1,5 +1,6 @@
 package org.jh.todomemo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 import org.jh.todomemo.ViewModel.writingMemoViewModel;
 import org.jh.todomemo.adapter.WritingConstructureAdapter;
 import org.jh.todomemo.db.entity.writingMemo;
+import org.jh.todomemo.listener.OnWritingItemClickListener;
+
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
@@ -48,18 +51,17 @@ public class MWriting extends Fragment {
             }
         });
 
-//        adapter.setOnItemClickListener(new OnWritingItemClickListener() {
-//            @Override
-//            public void onItemClick(WritingConstructureAdapter.ViewHolder holder, View view, int position) {
-//                WritingConstructure item = (WritingConstructure) adapter.getItem(position);
-//                Toast.makeText(getContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-//
-//                Intent intent = new Intent(getContext(), SubPreviewWriting.class);
-//                intent.putExtra("wtitle", item.getTitle());
-//                intent.putExtra("wcontents", item.getContents());
-//                startActivity(intent);
-//            }
-//        });
+        adapter.setOnItemClickListener(new OnWritingItemClickListener() {
+            @Override
+            public void onItemClick(WritingConstructureAdapter.ViewHolder holder, View view, int position) {
+                writingMemo wMemo = (writingMemo) adapter.getItem(position);
+
+                Intent intent = new Intent(getContext(), SubPreviewWriting.class);
+                intent.putExtra("wtitle", wMemo.getWritingTitle());
+                intent.putExtra("wcontents", wMemo.getWritingContent());
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
 }
