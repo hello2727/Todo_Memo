@@ -34,6 +34,17 @@ public class WritingConstructureAdapter extends RecyclerView.Adapter<WritingCons
                     }
                 }
             });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    int position = getAdapterPosition();
+
+                    if(listener != null){
+                        listener.onItemLongClick(ViewHolder.this, view, position);
+                    }
+                    return true;
+                }
+            });
         }
 
         public void setItem(writingMemo wMemo) {
@@ -98,6 +109,13 @@ public class WritingConstructureAdapter extends RecyclerView.Adapter<WritingCons
     public void onItemClick(ViewHolder holder, View view, int position) {
         if (listener != null) {
             listener.onItemClick(holder, view, position);
+        }
+    }
+
+    @Override
+    public void onItemLongClick(ViewHolder holder, View view, int position) {
+        if(listener != null){
+            listener.onItemLongClick(holder, view, position);
         }
     }
 }

@@ -1,8 +1,10 @@
 package org.jh.todomemo;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -52,14 +54,40 @@ public class MWriting extends Fragment {
         });
 
         adapter.setOnItemClickListener(new OnWritingItemClickListener() {
+            //각 메모를 클릭했을때 메모의 상세보기 액티비티가 나온다.
             @Override
             public void onItemClick(WritingConstructureAdapter.ViewHolder holder, View view, int position) {
-                writingMemo wMemo = (writingMemo) adapter.getItem(position);
+                writingMemo wMemo = adapter.getItem(position);
 
                 Intent intent = new Intent(getContext(), SubPreviewWriting.class);
                 intent.putExtra("wtitle", wMemo.getWritingTitle());
                 intent.putExtra("wcontents", wMemo.getWritingContent());
                 startActivity(intent);
+            }
+
+            //각 메모를 롱클릭을 하면 메모의 삭제여부를 묻는 다이얼로그 메시지가 뜬다.
+            @Override
+            public void onItemLongClick(WritingConstructureAdapter.ViewHolder holder, View view, final int position) {
+                AlertDialog.Builder IsDelete = new AlertDialog.Builder(getContext());
+                IsDelete.setTitle("메모 삭제여부")
+                        .setMessage("메모를 삭제할까요?")
+                        // "예" 버튼을 누르면 실행되는 리스너
+                        .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                writingMemo wMemo = adapter.getItem(position);
+
+                                Toast.makeText(getContext(), "삭제 테스트"+wMemo.getID(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        // "아니오" 버튼을 누르면 실행되는 리스너
+                        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                return; //아무것도 하지 않는다.
+                            }
+                        });
+                IsDelete.show();
             }
         });
         return rootView;
