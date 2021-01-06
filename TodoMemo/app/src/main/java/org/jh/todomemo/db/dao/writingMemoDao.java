@@ -21,7 +21,7 @@ public interface writingMemoDao {
     void updateWritingMemos(writingMemo... writingMemos);
 
     @Delete
-    void deleteWritingMemos(writingMemo... writingMemos);
+    void deleteWritingMemos(writingMemo writingMemos);
 
     //delete all query
     @Query("DELETE FROM writingMemo_table")

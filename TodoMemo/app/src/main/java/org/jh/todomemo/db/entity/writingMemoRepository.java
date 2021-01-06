@@ -13,7 +13,7 @@ import org.jh.todomemo.db.database.writingMemoDatabase;
 import java.util.List;
 
 public class writingMemoRepository {
-    //Dao의 멤버변수와 word를 넣을 list변수를 만들어줌
+    //Dao의 멤버변수와 메모를 넣을 list변수를 만들어줌
     private writingMemoDao mWritingMemoDao;
     private LiveData<List<writingMemo>> mAllWritingMemo;
 
@@ -21,7 +21,7 @@ public class writingMemoRepository {
         writingMemoDatabase db = writingMemoDatabase.getDatabase(application);
         //RoomDatabase에 있는 Dao를 가져온다.
         mWritingMemoDao = db.writingMemoDao();
-        //Dao의 쿼리를 이용하여 저장되어있는 모든 word를 가져온다.
+        //Dao의 쿼리를 이용하여 저장되어있는 모든 메모를 가져온다.
         mAllWritingMemo = mWritingMemoDao.getAllWritingMemos();
     }
 
@@ -29,9 +29,14 @@ public class writingMemoRepository {
         return mAllWritingMemo;
     }
 
-    //word를 추가하는 함수
+    //메모를 추가하는 함수
     public void insert(writingMemo writingMemo) {
         new insertAsyncTask(mWritingMemoDao).execute(writingMemo);
+    }
+
+    //메모를 삭제하는 함수
+    public void delete(writingMemo writingMemo) {
+        new deleteAsyncTask(mWritingMemoDao).execute(writingMemo);
     }
 
     /* UI-thread에서 할 경우 앱의 오류 없애기 */
@@ -45,6 +50,20 @@ public class writingMemoRepository {
         @Override
         protected Void doInBackground(final writingMemo... writingMemos) {
             mAsyncTaskDao.insertWritingMemos(writingMemos[0]);
+            return null;
+        }
+    }
+
+    private static class deleteAsyncTask extends  AsyncTask<writingMemo, Void, Void> {
+        private writingMemoDao mAsyncTaskDao;
+
+        deleteAsyncTask(writingMemoDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final writingMemo... writingMemos) {
+            mAsyncTaskDao.deleteWritingMemos(writingMemos[0]);
             return null;
         }
     }
