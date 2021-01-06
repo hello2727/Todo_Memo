@@ -77,7 +77,7 @@ public class MWriting extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 writingMemo wMemo = adapter.getItem(position);
 
-                                mwritingMemoViewModel.delete(wMemo);
+                                mwritingMemoViewModel.delete(wMemo); //특정 글메모 삭제
                             }
                         })
                         // "아니오" 버튼을 누르면 실행되는 리스너
