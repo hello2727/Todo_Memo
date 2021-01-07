@@ -33,7 +33,7 @@ public class SubPreviewWriting extends AppCompatActivity {
         //메모 상세내용 표시하기
         Intent intent = getIntent();
         final String wtitle = intent.getExtras().getString("wtitle");
-        String wcontents = intent.getExtras().getString("wcontents");
+        final String wcontents = intent.getExtras().getString("wcontents");
         previewWTitle.setText(wtitle);
         previewWContents.setText(wcontents);
 
@@ -44,6 +44,11 @@ public class SubPreviewWriting extends AppCompatActivity {
                 previewWTitle.setVisibility(View.GONE);
                 sbw_line.setVisibility(View.GONE);
 
+                if(et_previewWContents.requestFocus()){
+                    imm.hideSoftInputFromWindow(et_previewWContents.getWindowToken(), 0);
+                    et_previewWContents.clearFocus();
+                }
+
                 et_previewWTitle.setVisibility(View.VISIBLE); //화면에 나타내고
                 et_previewWTitle.setText(wtitle); //값 설정하고
                 et_previewWTitle.requestFocus(); //포커스 주고
@@ -51,10 +56,21 @@ public class SubPreviewWriting extends AppCompatActivity {
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
             }
         });
+        //내용을 클릭할 경우 메모의 내용 수정하기 기능이 나타난다.
         previewWContents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(et_previewWTitle.requestFocus()){
+                    imm.hideSoftInputFromWindow(et_previewWTitle.getWindowToken(), 0); //기존 키보드 내리고
+                    et_previewWTitle.clearFocus();
+                }
 
+                previewWContents.setVisibility(View.GONE); //내용 텍스트뷰는 안보이게 하고
+                et_previewWContents.setVisibility(View.VISIBLE); //내용 에디트텍스트는 화면에 나타내고
+                et_previewWContents.setText(wcontents); //값 설정하고
+                et_previewWContents.requestFocus(); //포커스 주고
+                //키보드 올라오게 하기
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
             }
         });
     }
@@ -63,12 +79,15 @@ public class SubPreviewWriting extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         //키보드 사라지게 하기
-        imm.hideSoftInputFromWindow(previewWTitle.getWindowToken(), 0);
+        if(et_previewWTitle.requestFocus()){
+            imm.hideSoftInputFromWindow(et_previewWTitle.getWindowToken(), 0);
+        }else if(et_previewWContents.requestFocus()){
+            imm.hideSoftInputFromWindow(et_previewWContents.getWindowToken(), 0);
+        }
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
     }
 }
