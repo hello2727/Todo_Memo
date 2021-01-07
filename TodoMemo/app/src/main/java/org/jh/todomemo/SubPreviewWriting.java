@@ -16,6 +16,7 @@ public class SubPreviewWriting extends AppCompatActivity {
     TextView previewWTitle, previewWContents;
     EditText et_previewWTitle, et_previewWContents;
     View sbw_line;
+    InputMethodManager imm; //키보드
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class SubPreviewWriting extends AppCompatActivity {
         et_previewWTitle = findViewById(R.id.et_previewWTitle);
         et_previewWContents = findViewById(R.id.et_previewWContents);
         sbw_line = findViewById(R.id.sbw_line);
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         //메모 상세내용 표시하기
         Intent intent = getIntent();
@@ -46,7 +48,6 @@ public class SubPreviewWriting extends AppCompatActivity {
                 et_previewWTitle.setText(wtitle); //값 설정하고
                 et_previewWTitle.requestFocus(); //포커스 주고
                 //키보드 올라오게 하기
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
             }
         });
@@ -62,7 +63,12 @@ public class SubPreviewWriting extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         //키보드 사라지게 하기
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        imm.hideSoftInputFromWindow(previewWTitle.getWindowToken(), 0);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
     }
 }
