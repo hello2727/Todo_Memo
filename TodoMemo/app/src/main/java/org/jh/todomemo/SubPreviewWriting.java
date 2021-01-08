@@ -1,6 +1,8 @@
 package org.jh.todomemo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,14 +11,25 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jh.todomemo.R;
+import org.jh.todomemo.ViewModel.writingMemoViewModel;
+import org.jh.todomemo.adapter.WritingConstructureAdapter;
+import org.jh.todomemo.db.entity.writingMemo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SubPreviewWriting extends AppCompatActivity {
     TextView previewWTitle, previewWContents;
     EditText et_previewWTitle, et_previewWContents;
     View sbw_line;
     InputMethodManager imm; //키보드
+    writingMemoViewModel mwritingMemoViewModel;
+
+    static int position;
+    String fixedTitle, fixedContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +42,14 @@ public class SubPreviewWriting extends AppCompatActivity {
         et_previewWContents = findViewById(R.id.et_previewWContents);
         sbw_line = findViewById(R.id.sbw_line);
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        //Model Provider
+        mwritingMemoViewModel = ViewModelProviders.of(this).get(writingMemoViewModel.class);
 
         //메모 상세내용 표시하기
         Intent intent = getIntent();
         final String wtitle = intent.getExtras().getString("wtitle");
         final String wcontents = intent.getExtras().getString("wcontents");
+        position = intent.getExtras().getInt("position");
         previewWTitle.setText(wtitle);
         previewWContents.setText(wcontents);
 
@@ -54,6 +70,8 @@ public class SubPreviewWriting extends AppCompatActivity {
                 et_previewWTitle.requestFocus(); //포커스 주고
                 //키보드 올라오게 하기
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+                fixedTitle = et_previewWTitle.getText().toString();
             }
         });
         //내용을 클릭할 경우 메모의 내용 수정하기 기능이 나타난다.
@@ -71,6 +89,8 @@ public class SubPreviewWriting extends AppCompatActivity {
                 et_previewWContents.requestFocus(); //포커스 주고
                 //키보드 올라오게 하기
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+                fixedContent = et_previewWContents.getText().toString();
             }
         });
     }
@@ -89,5 +109,7 @@ public class SubPreviewWriting extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        writingMemo writingMemo = new writingMemo(fixedTitle, fixedContent);
+        mwritingMemoViewModel.update(position-1, writingMemo); //에러발생
     }
 }

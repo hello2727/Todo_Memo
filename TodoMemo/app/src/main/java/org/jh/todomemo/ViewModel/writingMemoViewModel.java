@@ -35,4 +35,8 @@ public class writingMemoViewModel extends AndroidViewModel {
     public void delete(writingMemo writingMemo) {
         mwritingMemoRepository.delete(writingMemo);
     }
+
+    public void update(int idx, writingMemo writingMemos) {
+        mwritingMemoRepository.update(idx, writingMemos);
+    }
 }

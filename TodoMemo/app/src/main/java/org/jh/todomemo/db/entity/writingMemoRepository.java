@@ -39,6 +39,11 @@ public class writingMemoRepository {
         new deleteAsyncTask(mWritingMemoDao).execute(writingMemo);
     }
 
+    //메모를 수정하는 함수
+    public void update(int idx, writingMemo writingMemo) {
+        new updateAsyncTask(mWritingMemoDao, idx).execute(writingMemo);
+    }
+
     /* UI-thread에서 할 경우 앱의 오류 없애기 */
     private static class insertAsyncTask extends AsyncTask<writingMemo, Void, Void> {
         private writingMemoDao mAsyncTaskDao;
@@ -54,7 +59,7 @@ public class writingMemoRepository {
         }
     }
 
-    private static class deleteAsyncTask extends  AsyncTask<writingMemo, Void, Void> {
+    private static class deleteAsyncTask extends AsyncTask<writingMemo, Void, Void> {
         private writingMemoDao mAsyncTaskDao;
 
         deleteAsyncTask(writingMemoDao dao) {
@@ -64,6 +69,22 @@ public class writingMemoRepository {
         @Override
         protected Void doInBackground(final writingMemo... writingMemos) {
             mAsyncTaskDao.deleteWritingMemos(writingMemos[0]);
+            return null;
+        }
+    }
+
+    private static class updateAsyncTask extends AsyncTask<writingMemo, Void, Void> {
+        private writingMemoDao mAsyncTaskDao;
+        private int mIdx;
+
+        updateAsyncTask(writingMemoDao dao, int idx) {
+            mAsyncTaskDao = dao;
+            mIdx = idx;
+        }
+
+        @Override
+        protected Void doInBackground(final writingMemo... writingMemos) {
+            mAsyncTaskDao.updateWritingMemos(writingMemos[mIdx]);
             return null;
         }
     }

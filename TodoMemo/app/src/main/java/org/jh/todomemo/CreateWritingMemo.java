@@ -39,7 +39,7 @@ public class CreateWritingMemo extends AppCompatActivity {
             }
 
             writingMemo mwritingMemo = new writingMemo(wTitle, wContent);
-            mwritingMemoViewModel.insert(mwritingMemo); //에러나는 부분
+            mwritingMemoViewModel.insert(mwritingMemo);
         }
         finish();
     }

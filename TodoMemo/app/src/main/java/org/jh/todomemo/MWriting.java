@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,7 @@ public class MWriting extends Fragment {
                 Intent intent = new Intent(getContext(), SubPreviewWriting.class);
                 intent.putExtra("wtitle", wMemo.getWritingTitle());
                 intent.putExtra("wcontents", wMemo.getWritingContent());
+                intent.putExtra("position", position);
                 startActivity(intent);
             }
 
