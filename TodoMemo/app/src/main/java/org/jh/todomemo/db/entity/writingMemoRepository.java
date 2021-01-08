@@ -11,6 +11,7 @@ import org.jh.todomemo.db.dao.writingMemoDao;
 import org.jh.todomemo.db.database.writingMemoDatabase;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class writingMemoRepository {
     //Dao의 멤버변수와 메모를 넣을 list변수를 만들어줌
@@ -40,8 +41,8 @@ public class writingMemoRepository {
     }
 
     //메모를 수정하는 함수
-    public void update(int idx, writingMemo writingMemo) {
-        new updateAsyncTask(mWritingMemoDao, idx).execute(writingMemo);
+    public void update(String curTitle, String curContent, String newTitle, String newContent, writingMemo writingMemo) {
+        new updateAsyncTask(mWritingMemoDao, curTitle, curContent, newTitle, newContent).execute(writingMemo);
     }
 
     /* UI-thread에서 할 경우 앱의 오류 없애기 */
@@ -75,16 +76,19 @@ public class writingMemoRepository {
 
     private static class updateAsyncTask extends AsyncTask<writingMemo, Void, Void> {
         private writingMemoDao mAsyncTaskDao;
-        private int mIdx;
+        private String curTitle, curContent, newTitle, newContent;
 
-        updateAsyncTask(writingMemoDao dao, int idx) {
+        updateAsyncTask(writingMemoDao dao, String cTitle, String cContent, String nTitle, String nContent) {
             mAsyncTaskDao = dao;
-            mIdx = idx;
+            curTitle = cTitle;
+            curContent = cContent;
+            newTitle = nTitle;
+            newContent = nContent;
         }
 
         @Override
         protected Void doInBackground(final writingMemo... writingMemos) {
-            mAsyncTaskDao.updateWritingMemos(writingMemos[mIdx]);
+            mAsyncTaskDao.updateWritingMemo(curTitle, curContent, newTitle, newContent);
             return null;
         }
     }

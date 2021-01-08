@@ -1,6 +1,7 @@
 package org.jh.todomemo.ViewModel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -36,7 +37,8 @@ public class writingMemoViewModel extends AndroidViewModel {
         mwritingMemoRepository.delete(writingMemo);
     }
 
-    public void update(int idx, writingMemo writingMemos) {
-        mwritingMemoRepository.update(idx, writingMemos);
+    public void update(String curTitle, String curContent, String newTitle, String newContent, writingMemo writingMemos) {
+        mwritingMemoRepository.update(curTitle, curContent, newTitle, newContent, writingMemos);
+        Log.d("뭐야", curTitle);
     }
 }

@@ -30,6 +30,7 @@ public class SubPreviewWriting extends AppCompatActivity {
 
     static int position;
     String fixedTitle, fixedContent;
+    String wtitle, wcontents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,8 @@ public class SubPreviewWriting extends AppCompatActivity {
 
         //메모 상세내용 표시하기
         Intent intent = getIntent();
-        final String wtitle = intent.getExtras().getString("wtitle");
-        final String wcontents = intent.getExtras().getString("wcontents");
+        wtitle = intent.getExtras().getString("wtitle");
+        wcontents = intent.getExtras().getString("wcontents");
         position = intent.getExtras().getInt("position");
         previewWTitle.setText(wtitle);
         previewWContents.setText(wcontents);
@@ -110,6 +111,6 @@ public class SubPreviewWriting extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         writingMemo writingMemo = new writingMemo(fixedTitle, fixedContent);
-        mwritingMemoViewModel.update(position-1, writingMemo); //에러발생
+        mwritingMemoViewModel.update(wtitle, wcontents, fixedTitle, fixedContent, writingMemo); //에러발생
     }
 }
