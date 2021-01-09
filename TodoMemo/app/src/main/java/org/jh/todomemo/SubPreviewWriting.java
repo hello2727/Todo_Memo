@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -110,7 +111,7 @@ public class SubPreviewWriting extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        writingMemo writingMemo = new writingMemo(fixedTitle, fixedContent);
-        mwritingMemoViewModel.update(wtitle, wcontents, fixedTitle, fixedContent, writingMemo); //에러발생
+        mwritingMemoViewModel.update2(wtitle, wcontents, fixedTitle, fixedContent); //동작이 이상함(데이터베이스 문법 확인 및 에디트텍스트와 텍스트뷰 고치기 필요)
+        Toast.makeText(this, wtitle+","+wcontents+","+fixedTitle+","+fixedContent, Toast.LENGTH_SHORT).show();
     }
 }

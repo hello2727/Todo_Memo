@@ -41,8 +41,11 @@ public class writingMemoRepository {
     }
 
     //메모를 수정하는 함수
-    public void update(String curTitle, String curContent, String newTitle, String newContent, writingMemo writingMemo) {
-        new updateAsyncTask(mWritingMemoDao, curTitle, curContent, newTitle, newContent).execute(writingMemo);
+    public void update(writingMemo writingMemo) {
+        new updateAsyncTask(mWritingMemoDao).execute(writingMemo);
+    }
+    public void update2(String curTitle, String curContent, String newTitle, String newContent) {
+        new update2AsyncTask(mWritingMemoDao).execute(curTitle, curContent, newTitle, newContent);
     }
 
     /* UI-thread에서 할 경우 앱의 오류 없애기 */
@@ -76,19 +79,27 @@ public class writingMemoRepository {
 
     private static class updateAsyncTask extends AsyncTask<writingMemo, Void, Void> {
         private writingMemoDao mAsyncTaskDao;
-        private String curTitle, curContent, newTitle, newContent;
 
-        updateAsyncTask(writingMemoDao dao, String cTitle, String cContent, String nTitle, String nContent) {
+        updateAsyncTask(writingMemoDao dao) {
             mAsyncTaskDao = dao;
-            curTitle = cTitle;
-            curContent = cContent;
-            newTitle = nTitle;
-            newContent = nContent;
         }
 
         @Override
         protected Void doInBackground(final writingMemo... writingMemos) {
-            mAsyncTaskDao.updateWritingMemo(curTitle, curContent, newTitle, newContent);
+            mAsyncTaskDao.updateWritingMemos(writingMemos[0]);
+            return null;
+        }
+    }
+    private static class update2AsyncTask extends AsyncTask<String, Void, Void> {
+        private writingMemoDao mAsyncTaskDao;
+
+        update2AsyncTask(writingMemoDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            mAsyncTaskDao.updateWritingMemo(strings[0], strings[1], strings[2], strings[3]);
             return null;
         }
     }
