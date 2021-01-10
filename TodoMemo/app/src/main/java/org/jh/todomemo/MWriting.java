@@ -63,7 +63,7 @@ public class MWriting extends Fragment {
                 Intent intent = new Intent(getContext(), SubPreviewWriting.class);
                 intent.putExtra("wtitle", wMemo.getWritingTitle());
                 intent.putExtra("wcontents", wMemo.getWritingContent());
-                intent.putExtra("position", position);
+                intent.putExtra("ID", wMemo.getID());
                 startActivity(intent);
             }
 

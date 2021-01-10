@@ -37,10 +37,7 @@ public class writingMemoViewModel extends AndroidViewModel {
         mwritingMemoRepository.delete(writingMemo);
     }
 
-    public void update(writingMemo writingMemo) {
-        mwritingMemoRepository.update(writingMemo);
-    }
-    public void update2(String curTitle, String curContent, String newTitle, String newContent) {
-        mwritingMemoRepository.update2(curTitle, curContent, newTitle, newContent);
+    public void update(int id, String newTitle, String newContent) {
+        mwritingMemoRepository.update(id, newTitle, newContent);
     }
 }

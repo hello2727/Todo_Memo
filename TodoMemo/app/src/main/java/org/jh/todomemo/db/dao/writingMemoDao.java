@@ -28,8 +28,8 @@ public interface writingMemoDao {
     void deleteAllWritingMemos();
 
     //update query
-    @Query("UPDATE writingMemo_table SET writing_Title = :newTitle AND writing_content = :newContent WHERE writing_Title = :curTitle AND writing_content = :curContent")
-    void updateWritingMemo(String curTitle, String curContent, String newTitle, String newContent);
+    @Query("UPDATE writingMemo_table SET writing_Title = :newTitle, writing_content = :newContent WHERE ID IS :id")
+    void updateWritingMemo(int id, String newTitle, String newContent);
 
     //get all data query
     @Query("SELECT * FROM writingMemo_table")

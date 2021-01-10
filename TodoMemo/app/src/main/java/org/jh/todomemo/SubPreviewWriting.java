@@ -29,8 +29,7 @@ public class SubPreviewWriting extends AppCompatActivity {
     InputMethodManager imm; //키보드
     writingMemoViewModel mwritingMemoViewModel;
 
-    static int position;
-    String fixedTitle, fixedContent;
+    static int id;
     String wtitle, wcontents;
 
     @Override
@@ -51,7 +50,7 @@ public class SubPreviewWriting extends AppCompatActivity {
         Intent intent = getIntent();
         wtitle = intent.getExtras().getString("wtitle");
         wcontents = intent.getExtras().getString("wcontents");
-        position = intent.getExtras().getInt("position");
+        id = intent.getExtras().getInt("ID");
         previewWTitle.setText(wtitle);
         previewWContents.setText(wcontents);
 
@@ -72,10 +71,9 @@ public class SubPreviewWriting extends AppCompatActivity {
                 et_previewWTitle.requestFocus(); //포커스 주고
                 //키보드 올라오게 하기
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-
-                fixedTitle = et_previewWTitle.getText().toString();
             }
         });
+
         //내용을 클릭할 경우 메모의 내용 수정하기 기능이 나타난다.
         previewWContents.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,8 +89,6 @@ public class SubPreviewWriting extends AppCompatActivity {
                 et_previewWContents.requestFocus(); //포커스 주고
                 //키보드 올라오게 하기
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-
-                fixedContent = et_previewWContents.getText().toString();
             }
         });
     }
@@ -111,7 +107,18 @@ public class SubPreviewWriting extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        mwritingMemoViewModel.update2(wtitle, wcontents, fixedTitle, fixedContent); //동작이 이상함(데이터베이스 문법 확인 및 에디트텍스트와 텍스트뷰 고치기 필요)
-        Toast.makeText(this, wtitle+","+wcontents+","+fixedTitle+","+fixedContent, Toast.LENGTH_SHORT).show();
+        String newTitle = et_previewWTitle.getText().toString();
+        String newContent = et_previewWContents.getText().toString();
+
+        /* 환경 조건에 따라 글내용 수정 */
+        if(newTitle.equals("") && newContent.equals("")){
+            mwritingMemoViewModel.update(id, wtitle, wcontents);
+        }else if(newTitle.equals("")){
+            mwritingMemoViewModel.update(id, wtitle, newContent);
+        }else if(newContent.equals("")){
+            mwritingMemoViewModel.update(id, newTitle, wcontents);
+        }else{
+            mwritingMemoViewModel.update(id, newTitle, newContent);
+        }
     }
 }
