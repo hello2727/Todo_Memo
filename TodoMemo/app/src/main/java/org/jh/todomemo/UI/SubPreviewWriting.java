@@ -1,4 +1,4 @@
-package org.jh.todomemo;
+package org.jh.todomemo.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;

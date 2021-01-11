@@ -1,10 +1,12 @@
-package org.jh.todomemo;
+package org.jh.todomemo.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
+
+import org.jh.todomemo.R;
 import org.jh.todomemo.ViewModel.writingMemoViewModel;
 import org.jh.todomemo.db.entity.writingMemo;
 

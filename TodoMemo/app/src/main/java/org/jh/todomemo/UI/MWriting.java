@@ -1,4 +1,4 @@
-package org.jh.todomemo;
+package org.jh.todomemo.UI;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,20 +11,17 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import org.jh.todomemo.R;
 import org.jh.todomemo.ViewModel.writingMemoViewModel;
 import org.jh.todomemo.adapter.WritingConstructureAdapter;
 import org.jh.todomemo.db.entity.writingMemo;
 import org.jh.todomemo.listener.OnWritingItemClickListener;
 
 import java.util.List;
-
-import io.reactivex.disposables.Disposable;
 
 public class MWriting extends Fragment {
     RecyclerView recyclerView;

@@ -1,4 +1,4 @@
-package org.jh.todomemo;
+package org.jh.todomemo.UI;
 
 import android.os.Bundle;
 
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import org.jh.todomemo.R;
 import org.jh.todomemo.adapter.PictureConstructureAdapter;
 import org.jh.todomemo.data.PictureConstructure;
 import org.jh.todomemo.listener.OnPictureItemClickListener;

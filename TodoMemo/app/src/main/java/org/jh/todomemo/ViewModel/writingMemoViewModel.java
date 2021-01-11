@@ -1,13 +1,12 @@
 package org.jh.todomemo.ViewModel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import org.jh.todomemo.db.entity.writingMemo;
-import org.jh.todomemo.db.entity.writingMemoRepository;
+import org.jh.todomemo.Repository.writingMemoRepository;
 
 import java.util.List;
 

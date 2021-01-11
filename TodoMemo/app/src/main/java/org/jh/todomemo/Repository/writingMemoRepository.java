@@ -1,6 +1,6 @@
 /*여러 데이터에 대한 접근을 할 수 있는 class.
  주로 로컬 데이터(앱 내장데이터)를 가져올지 네트워크에서 데이터를 가져올지를 다룸.*/
-package org.jh.todomemo.db.entity;
+package org.jh.todomemo.Repository;
 
 import android.app.Application;
 import android.os.AsyncTask;
@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 
 import org.jh.todomemo.db.dao.writingMemoDao;
 import org.jh.todomemo.db.database.writingMemoDatabase;
+import org.jh.todomemo.db.entity.writingMemo;
 
 import java.util.List;
 import java.util.NoSuchElementException;

@@ -1,4 +1,4 @@
-package org.jh.todomemo;
+package org.jh.todomemo.UI;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+
+import org.jh.todomemo.R;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
