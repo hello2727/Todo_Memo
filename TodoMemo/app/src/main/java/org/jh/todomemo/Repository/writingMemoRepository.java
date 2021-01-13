@@ -36,9 +36,14 @@ public class writingMemoRepository {
         new insertAsyncTask(mWritingMemoDao).execute(writingMemo);
     }
 
-    //메모를 삭제하는 함수
+    //리사이클러뷰 어댑터 선언된 곳에서 메모를 삭제하는 함수
     public void delete(writingMemo writingMemo) {
         new deleteAsyncTask(mWritingMemoDao).execute(writingMemo);
+    }
+
+    //리사이클러뷰 어댑터 선언되지 않은 곳에서 메모를 삭제하는 함수
+    public void deleteSpecificWritingMemo(int id){
+        new deleteSpecificRowAsyncTask(mWritingMemoDao).execute(id);
     }
 
     //메모를 수정하는 함수
@@ -71,6 +76,20 @@ public class writingMemoRepository {
         @Override
         protected Void doInBackground(final writingMemo... writingMemos) {
             mAsyncTaskDao.deleteWritingMemos(writingMemos[0]);
+            return null;
+        }
+    }
+
+    private static class deleteSpecificRowAsyncTask extends AsyncTask<Integer, Void, Void> {
+        private writingMemoDao mAsyncTaskDao;
+
+        deleteSpecificRowAsyncTask(writingMemoDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Integer ...id) {
+            mAsyncTaskDao.deleteSpecificWritingMemo(id[0]);
             return null;
         }
     }

@@ -27,6 +27,10 @@ public interface writingMemoDao {
     @Query("DELETE FROM writingMemo_table")
     void deleteAllWritingMemos();
 
+    //delete specific query
+    @Query("DELETE FROM writingMemo_table WHERE ID IS :id")
+    void deleteSpecificWritingMemo(int id);
+
     //update query
     @Query("UPDATE writingMemo_table SET writing_Title = :newTitle, writing_content = :newContent WHERE ID IS :id")
     void updateWritingMemo(int id, String newTitle, String newContent);

@@ -1,13 +1,12 @@
-package org.jh.todomemo.UI;
+package org.jh.todomemo.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -19,9 +18,6 @@ import org.jh.todomemo.ViewModel.writingMemoViewModel;
 import org.jh.todomemo.adapter.WritingConstructureAdapter;
 import org.jh.todomemo.db.entity.writingMemo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SubPreviewWriting extends AppCompatActivity {
     TextView previewWTitle, previewWContents;
     EditText et_previewWTitle, et_previewWContents;
@@ -29,6 +25,7 @@ public class SubPreviewWriting extends AppCompatActivity {
     InputMethodManager imm; //키보드
     writingMemoViewModel mwritingMemoViewModel;
 
+    boolean startFlag1, startFlag2 = false;
     static int id;
     String wtitle, wcontents;
 
@@ -60,6 +57,7 @@ public class SubPreviewWriting extends AppCompatActivity {
             public void onClick(View v) {
                 previewWTitle.setVisibility(View.GONE);
                 sbw_line.setVisibility(View.GONE);
+                startFlag1 = true;
 
                 if(et_previewWContents.requestFocus()){
                     imm.hideSoftInputFromWindow(et_previewWContents.getWindowToken(), 0);
@@ -82,6 +80,7 @@ public class SubPreviewWriting extends AppCompatActivity {
                     imm.hideSoftInputFromWindow(et_previewWTitle.getWindowToken(), 0); //기존 키보드 내리고
                     et_previewWTitle.clearFocus();
                 }
+                startFlag2 = true;
 
                 previewWContents.setVisibility(View.GONE); //내용 텍스트뷰는 안보이게 하고
                 et_previewWContents.setVisibility(View.VISIBLE); //내용 에디트텍스트는 화면에 나타내고
@@ -111,14 +110,28 @@ public class SubPreviewWriting extends AppCompatActivity {
         String newContent = et_previewWContents.getText().toString();
 
         /* 환경 조건에 따라 글내용 수정 */
-        if(newTitle.equals("") && newContent.equals("")){
+        if (!startFlag1 && !startFlag2) {
             mwritingMemoViewModel.update(id, wtitle, wcontents);
-        }else if(newTitle.equals("")){
-            mwritingMemoViewModel.update(id, wtitle, newContent);
-        }else if(newContent.equals("")){
-            mwritingMemoViewModel.update(id, newTitle, wcontents);
-        }else{
+        } else if (startFlag1 && !startFlag2) {
+            if(newTitle.equals("") && wcontents.equals("")){
+                mwritingMemoViewModel.deleteSpecificWritingMemo(id);
+                Toast.makeText(this, "입력한 내용이 없어 메모가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+            }else {
+                mwritingMemoViewModel.update(id, newTitle, wcontents);
+            }
+        }else if(!startFlag1 && startFlag2){
+            if(wtitle.equals("") && newContent.equals("")){
+                mwritingMemoViewModel.deleteSpecificWritingMemo(id);
+                Toast.makeText(this, "입력한 내용이 없어 메모가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+            }else{
+                mwritingMemoViewModel.update(id, wtitle, newContent);
+            }
+        }else if(startFlag1 && startFlag2 && newTitle.equals("") && newContent.equals("")){
+            mwritingMemoViewModel.deleteSpecificWritingMemo(id);
+            Toast.makeText(this, "입력한 내용이 없어 메모가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+        }else if(startFlag1 && startFlag2){
             mwritingMemoViewModel.update(id, newTitle, newContent);
         }
+        Toast.makeText(this, wtitle+","+wcontents, Toast.LENGTH_SHORT).show();
     }
 }

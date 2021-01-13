@@ -1,4 +1,4 @@
-package org.jh.todomemo.UI;
+package org.jh.todomemo.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
