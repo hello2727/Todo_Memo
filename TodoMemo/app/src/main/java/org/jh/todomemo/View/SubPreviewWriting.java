@@ -132,6 +132,5 @@ public class SubPreviewWriting extends AppCompatActivity {
         }else if(startFlag1 && startFlag2){
             mwritingMemoViewModel.update(id, newTitle, newContent);
         }
-        Toast.makeText(this, wtitle+","+wcontents, Toast.LENGTH_SHORT).show();
     }
 }
