@@ -93,7 +93,11 @@ public class SubPreviewWriting extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         //키보드 사라지게 하기
-        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        if(et_previewWTitle.requestFocus()){
+            imm.hideSoftInputFromWindow(et_previewWTitle.getWindowToken(), 0);
+        }else if(et_previewWContents.requestFocus()){
+            imm.hideSoftInputFromWindow(et_previewWContents.getWindowToken(), 0);
+        }
     }
 
     @Override

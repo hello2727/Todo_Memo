@@ -108,4 +108,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(isFabOpen){
+            fab3.startAnimation(fab_close);
+            fab2.startAnimation(fab_close);
+            fab1.startAnimation(fab_anticlockwise);
+            fab3.setClickable(false);
+            fab2.setClickable(false);
+            isFabOpen = false;
+        }
+    }
 }
