@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -98,6 +99,13 @@ public class MainActivity extends AppCompatActivity {
                     fab2.setClickable(true);
                     isFabOpen = true;
                 }
+            }
+        });
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent capture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivity(capture);
             }
         });
         fab3.setOnClickListener(new View.OnClickListener() {
