@@ -1,25 +1,32 @@
 package org.jh.todomemo.View.main;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import org.jh.todomemo.R;
+import org.jh.todomemo.View.CreatePictureMemoActivity;
 import org.jh.todomemo.View.CreateWritingMemo;
 import org.jh.todomemo.View.main.list.MPicture;
 import org.jh.todomemo.View.main.list.MWriting;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int REQUEST_CAPTURE = 0;
+
     Toolbar toolbar;
 
     Fragment fragment1;
@@ -101,13 +108,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        //사진찍기 위해 카메라모드로 이동
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent capture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivity(capture);
+                startActivityForResult(capture, REQUEST_CAPTURE);
             }
         });
+        //글메모 생성 액티비티로 이동
         fab3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,6 +124,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(createWritingMemo);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        if(requestCode == REQUEST_CAPTURE){
+            if (resultCode == RESULT_OK && intent.hasExtra("data")){
+                //카메라로 찍은 사진 가져오기
+                Bitmap bitmap = (Bitmap) intent.getExtras().get("data");
+
+                //사진을 사진메모 생성 액티비티로 넘기기
+                Intent createPictureMemo = new Intent(this, CreatePictureMemoActivity.class);
+                if(bitmap != null){
+                    createPictureMemo.putExtra("captured", bitmap);
+                }
+                startActivity(createPictureMemo);
+            }
+        }
     }
 
     @Override

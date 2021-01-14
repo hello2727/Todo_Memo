@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".View.CreatePictureMemoActivity"></activity>
         <activity android:name=".View.CreateWritingMemo" />
         <activity android:name=".View.SubPreviewWriting" />
         <activity android:name=".View.main.MainActivity">
