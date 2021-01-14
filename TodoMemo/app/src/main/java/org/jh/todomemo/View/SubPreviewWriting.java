@@ -1,7 +1,6 @@
 package org.jh.todomemo.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
@@ -15,8 +14,6 @@ import android.widget.Toast;
 
 import org.jh.todomemo.R;
 import org.jh.todomemo.ViewModel.writingMemoViewModel;
-import org.jh.todomemo.adapter.WritingConstructureAdapter;
-import org.jh.todomemo.db.entity.writingMemo;
 
 public class SubPreviewWriting extends AppCompatActivity {
     TextView previewWTitle, previewWContents;

@@ -1,4 +1,4 @@
-package org.jh.todomemo.db.dao;
+package org.jh.todomemo.Model.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -8,7 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import org.jh.todomemo.db.entity.writingMemo;
+import org.jh.todomemo.Model.entity.writingMemo;
 
 import java.util.List;
 

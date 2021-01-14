@@ -1,4 +1,4 @@
-package org.jh.todomemo.adapter;
+package org.jh.todomemo.View.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.jh.todomemo.listener.OnPictureItemClickListener;
+import org.jh.todomemo.View.listener.OnPictureItemClickListener;
 import org.jh.todomemo.R;
 import org.jh.todomemo.data.PictureConstructure;
 

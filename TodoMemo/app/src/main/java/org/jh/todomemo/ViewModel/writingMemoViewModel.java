@@ -5,8 +5,8 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import org.jh.todomemo.db.entity.writingMemo;
-import org.jh.todomemo.Repository.writingMemoRepository;
+import org.jh.todomemo.Model.entity.writingMemo;
+import org.jh.todomemo.Repository.model.writingMemoRepository;
 
 import java.util.List;
 

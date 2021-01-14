@@ -1,4 +1,4 @@
-package org.jh.todomemo.db.entity;
+package org.jh.todomemo.Model.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

@@ -1,4 +1,4 @@
-package org.jh.todomemo.View;
+package org.jh.todomemo.View.main.list;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,16 +16,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.jh.todomemo.R;
+import org.jh.todomemo.View.SubPreviewWriting;
 import org.jh.todomemo.ViewModel.writingMemoViewModel;
-import org.jh.todomemo.adapter.WritingConstructureAdapter;
-import org.jh.todomemo.db.entity.writingMemo;
-import org.jh.todomemo.listener.OnWritingItemClickListener;
+import org.jh.todomemo.View.adapter.WritingMemoRecyclerViewAdapter;
+import org.jh.todomemo.Model.entity.writingMemo;
+import org.jh.todomemo.View.listener.OnWritingItemClickListener;
 
 import java.util.List;
 
 public class MWriting extends Fragment {
     RecyclerView recyclerView;
-    WritingConstructureAdapter adapter;
+    WritingMemoRecyclerViewAdapter adapter;
     writingMemoViewModel mwritingMemoViewModel;
 
     @Override
@@ -34,7 +35,7 @@ public class MWriting extends Fragment {
 
         //RecyclerView
         recyclerView = rootView.findViewById(R.id.recyclerViewWriting);
-        adapter = new WritingConstructureAdapter(getContext());
+        adapter = new WritingMemoRecyclerViewAdapter(getContext());
         recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -54,7 +55,7 @@ public class MWriting extends Fragment {
         adapter.setOnItemClickListener(new OnWritingItemClickListener() {
             //각 메모를 클릭했을때 메모의 상세보기 액티비티가 나온다.
             @Override
-            public void onItemClick(WritingConstructureAdapter.ViewHolder holder, View view, int position) {
+            public void onItemClick(WritingMemoRecyclerViewAdapter.ViewHolder holder, View view, int position) {
                 writingMemo wMemo = adapter.getItem(position);
 
                 Intent intent = new Intent(getContext(), SubPreviewWriting.class);
@@ -66,7 +67,7 @@ public class MWriting extends Fragment {
 
             //각 메모를 롱클릭을 하면 메모의 삭제여부를 묻는 다이얼로그 메시지가 뜬다.
             @Override
-            public void onItemLongClick(WritingConstructureAdapter.ViewHolder holder, View view, final int position) {
+            public void onItemLongClick(WritingMemoRecyclerViewAdapter.ViewHolder holder, View view, final int position) {
                 AlertDialog.Builder IsDelete = new AlertDialog.Builder(getContext());
                 IsDelete.setTitle("메모 삭제여부")
                         .setMessage("메모를 삭제할까요?")

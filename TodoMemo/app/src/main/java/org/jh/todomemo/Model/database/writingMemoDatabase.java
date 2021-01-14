@@ -1,4 +1,4 @@
-package org.jh.todomemo.db.database;
+package org.jh.todomemo.Model.database;
 
 import android.content.Context;
 
@@ -6,8 +6,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import org.jh.todomemo.db.dao.writingMemoDao;
-import org.jh.todomemo.db.entity.writingMemo;
+import org.jh.todomemo.Model.dao.writingMemoDao;
+import org.jh.todomemo.Model.entity.writingMemo;
 
 @Database(entities = {writingMemo.class}, version = 1)
 public abstract class writingMemoDatabase extends RoomDatabase {

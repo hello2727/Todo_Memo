@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".View.CreateWritingMemo"></activity>
         <activity android:name=".View.SubPreviewWriting" />
-        <activity android:name=".View.MainActivity">
+        <activity android:name=".View.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

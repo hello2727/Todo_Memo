@@ -1,4 +1,4 @@
-package org.jh.todomemo.View;
+package org.jh.todomemo.View.main;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import org.jh.todomemo.R;
+import org.jh.todomemo.View.CreateWritingMemo;
+import org.jh.todomemo.View.main.list.MPicture;
+import org.jh.todomemo.View.main.list.MWriting;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;

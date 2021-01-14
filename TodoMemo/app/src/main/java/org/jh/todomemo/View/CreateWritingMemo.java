@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 import org.jh.todomemo.R;
 import org.jh.todomemo.ViewModel.writingMemoViewModel;
-import org.jh.todomemo.db.entity.writingMemo;
+import org.jh.todomemo.Model.entity.writingMemo;
 
 public class CreateWritingMemo extends AppCompatActivity {
     EditText cwm_previewWTitle, cwm_previewWContents;

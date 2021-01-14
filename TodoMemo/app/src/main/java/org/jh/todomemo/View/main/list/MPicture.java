@@ -1,4 +1,4 @@
-package org.jh.todomemo.View;
+package org.jh.todomemo.View.main.list;
 
 import android.os.Bundle;
 
@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import org.jh.todomemo.R;
-import org.jh.todomemo.adapter.PictureConstructureAdapter;
+import org.jh.todomemo.View.adapter.PictureConstructureAdapter;
 import org.jh.todomemo.data.PictureConstructure;
-import org.jh.todomemo.listener.OnPictureItemClickListener;
+import org.jh.todomemo.View.listener.OnPictureItemClickListener;
 
 public class MPicture extends Fragment {
     RecyclerView recyclerView;
