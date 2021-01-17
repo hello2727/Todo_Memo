@@ -24,6 +24,8 @@ import org.jh.todomemo.View.CreateWritingMemo;
 import org.jh.todomemo.View.main.list.MPicture;
 import org.jh.todomemo.View.main.list.MWriting;
 
+import java.io.ByteArrayOutputStream;
+
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CAPTURE = 0;
 
@@ -113,7 +115,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent capture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(capture, REQUEST_CAPTURE);
+                if(capture.resolveActivity(getPackageManager()) != null){
+                    startActivityForResult(capture, REQUEST_CAPTURE);
+                }
             }
         });
         //글메모 생성 액티비티로 이동
@@ -138,7 +142,9 @@ public class MainActivity extends AppCompatActivity {
                 //사진을 사진메모 생성 액티비티로 넘기기
                 Intent createPictureMemo = new Intent(this, CreatePictureMemoActivity.class);
                 if(bitmap != null){
-                    createPictureMemo.putExtra("captured", bitmap);
+                    createPictureMemo.putExtra(MediaStore.EXTRA_OUTPUT, bitmap);
+                }else{
+                    Toast.makeText(this, "사진을 불러오는데 실패했습니다! 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
                 }
                 startActivity(createPictureMemo);
             }

@@ -30,5 +30,6 @@
         android:id="@+id/cpm_iv_captured"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/pleasepicture" />
+        app:srcCompat="@drawable/pleasepicture"
+        android:scaleType="fitXY" />
 </LinearLayout>
