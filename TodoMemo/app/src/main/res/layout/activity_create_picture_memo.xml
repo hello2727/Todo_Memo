@@ -12,7 +12,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/cwm_toolbar"
+            android:id="@+id/cpm_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#86E57F"
@@ -27,7 +27,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
-        android:id="@+id/iv_captured"
+        android:id="@+id/cpm_iv_captured"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:srcCompat="@drawable/pleasepicture" />
