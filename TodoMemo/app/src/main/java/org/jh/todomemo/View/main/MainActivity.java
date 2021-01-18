@@ -1,13 +1,14 @@
 package org.jh.todomemo.View.main;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -25,9 +26,12 @@ import org.jh.todomemo.View.main.list.MPicture;
 import org.jh.todomemo.View.main.list.MWriting;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.text.SimpleDateFormat;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CAPTURE = 0;
+    private File output=null;
 
     Toolbar toolbar;
 
@@ -83,9 +87,9 @@ public class MainActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-        fab1 = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-        fab2 = (FloatingActionButton) findViewById(R.id.floatingActionButton2);
-        fab3 = (FloatingActionButton) findViewById(R.id.floatingActionButton3);
+        fab1 = findViewById(R.id.floatingActionButton);
+        fab2 = findViewById(R.id.floatingActionButton2);
+        fab3 = findViewById(R.id.floatingActionButton3);
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
         fab_clockwise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_clockwise);
@@ -115,6 +119,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent capture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+//                File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+//                output = new File(dir, "CameraContentDemo.jpeg");
+//                capture.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(output));
+
                 if(capture.resolveActivity(getPackageManager()) != null){
                     startActivityForResult(capture, REQUEST_CAPTURE);
                 }
@@ -142,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 //사진을 사진메모 생성 액티비티로 넘기기
                 Intent createPictureMemo = new Intent(this, CreatePictureMemoActivity.class);
                 if(bitmap != null){
-                    createPictureMemo.putExtra(MediaStore.EXTRA_OUTPUT, bitmap);
+                    createPictureMemo.putExtra("captured_image", bitmap);
                 }else{
                     Toast.makeText(this, "사진을 불러오는데 실패했습니다! 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
                 }

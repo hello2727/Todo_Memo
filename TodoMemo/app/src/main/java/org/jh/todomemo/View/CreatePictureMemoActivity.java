@@ -37,15 +37,9 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
 
         //카메라에서 찍은 사진
         Intent intent = getIntent();
-        bitmap = (Bitmap)intent.getParcelableExtra(MediaStore.EXTRA_OUTPUT);
+        bitmap = intent.getParcelableExtra("captured_image");
 
-        iv_captured.setImageBitmap(rotate(bitmap, 0));
-    }
-
-    private Bitmap rotate(Bitmap bitmap, float degree) {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(degree);
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        iv_captured.setImageBitmap(bitmap);
     }
 
     //툴바에 옵션메뉴 추가하기
