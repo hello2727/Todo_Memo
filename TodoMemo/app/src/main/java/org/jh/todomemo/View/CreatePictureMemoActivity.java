@@ -1,21 +1,15 @@
 package org.jh.todomemo.View;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import org.jh.todomemo.R;
 
@@ -24,7 +18,6 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
     ImageView iv_captured;
     Bitmap bitmap;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -3,10 +3,15 @@ package org.jh.todomemo.View.main;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -27,11 +32,13 @@ import org.jh.todomemo.View.main.list.MWriting;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CAPTURE = 0;
-    private File output=null;
+    Uri photoURI;
 
     Toolbar toolbar;
 
@@ -119,13 +126,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent capture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-//                File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-//                output = new File(dir, "CameraContentDemo.jpeg");
-//                capture.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(output));
-
                 if(capture.resolveActivity(getPackageManager()) != null){
-                    startActivityForResult(capture, REQUEST_CAPTURE);
+//                    photoURI = createImageUri(newFileName(), "image/jpg");
+//                    capture.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+
+//                    File photoFile = null;
+//                    try{
+//                        photoFile = createImageFile();
+//                    }catch (IOException ex){
+//
+//                    }
+//                    if(photoFile != null){
+//                        Log.d("여기다", photoFile.toString());
+//                        Uri photoURI = FileProvider.getUriForFile(MainActivity.this, "com.example.android.fileprovider", photoFile);
+//                        capture.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+
+                        startActivityForResult(capture, REQUEST_CAPTURE);
+//                    }
                 }
             }
         });
@@ -139,21 +156,55 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //이미지 Uri 생성
+    private Uri createImageUri(String filename, String mimeType) {
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.DISPLAY_NAME, filename);
+        values.put(MediaStore.Images.Media.MIME_TYPE, mimeType);
+
+        return getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+    }
+    // 새파일 이름 생성
+    private String newFileName(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String filename = sdf.format(System.currentTimeMillis());
+
+        return filename + ".jpg";
+    }
+    //미디어 스토어에서 이미지 읽어오기
+    private Bitmap loadBitmapFromMediaStoreBy(Uri photoUri){
+        Bitmap image = null;
+        try{
+            if(Build.VERSION.SDK_INT > 27){
+                ImageDecoder.Source source = ImageDecoder.createSource(this.getContentResolver(), photoUri);
+                image = ImageDecoder.decodeBitmap(source);
+            }else{
+                image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return image;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
 
         if(requestCode == REQUEST_CAPTURE){
             if (resultCode == RESULT_OK && intent.hasExtra("data")){
+//                if (photoURI != null) {
                 //카메라로 찍은 사진 가져오기
                 Bitmap bitmap = (Bitmap) intent.getExtras().get("data");
+//                    Bitmap bitmap = loadBitmapFromMediaStoreBy(photoURI);
+//                    photoURI = null;
 
                 //사진을 사진메모 생성 액티비티로 넘기기
                 Intent createPictureMemo = new Intent(this, CreatePictureMemoActivity.class);
-                if(bitmap != null){
+                if (bitmap != null) {
                     createPictureMemo.putExtra("captured_image", bitmap);
-                }else{
-                    Toast.makeText(this, "사진을 불러오는데 실패했습니다! 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
+                } else {
+                        Toast.makeText(this, "사진을 불러오는데 실패했습니다! 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
                 }
                 startActivity(createPictureMemo);
             }
