@@ -6,27 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.ImageDecoder;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Toast;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -35,16 +27,12 @@ import org.jh.todomemo.View.CreatePictureMemoActivity;
 import org.jh.todomemo.View.CreateWritingMemo;
 import org.jh.todomemo.View.main.list.MPicture;
 import org.jh.todomemo.View.main.list.MWriting;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CAPTURE = 0;
     Uri photoURI;
+    Uri capturedUri;
 
     Toolbar toolbar;
 
@@ -133,24 +121,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent capture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if(capture.resolveActivity(getPackageManager()) != null){
-//                    photoURI = createImageUri(newFileName(), "image/jpg");
-//                    capture.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-
-//                    File photoFile = null;
-//                    try{
-//                        photoFile = createImageFile();
-//                    }catch (IOException ex){
-//
-//                    }
-//                    if(photoFile != null){
-//                        Log.d("여기다", photoFile.toString());
-//                        Uri photoURI = FileProvider.getUriForFile(MainActivity.this, "com.example.android.fileprovider", photoFile);
-//                        capture.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-
-//                    photoURI = createImageUri(newFileName(), "image/jpg");
-//                    capture.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                    photoURI = createImageUri(newFileName(), "image/jpg");
+                    capture.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                     startActivityForResult(capture, REQUEST_CAPTURE);
-//                    }
                 }
             }
         });
@@ -205,49 +178,19 @@ public class MainActivity extends AppCompatActivity {
 
         return filename + ".jpg";
     }
-    //미디어 스토어에서 이미지 읽어오기
-    private Bitmap loadBitmapFromMediaStoreBy(Uri photoUri){
-        Bitmap image = null;
-        try{
-            if(Build.VERSION.SDK_INT > 27){
-                ImageDecoder.Source source = ImageDecoder.createSource(this.getContentResolver(), photoUri);
-                image = ImageDecoder.decodeBitmap(source);
-            }else{
-                image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        return image;
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
 
         if(resultCode == RESULT_OK){
-            if(requestCode == REQUEST_CAPTURE && intent.hasExtra("data")){
-//                if (photoURI != null) {
-                    //카메라로 찍은 사진 가져오기
-                Bitmap bitmap = (Bitmap) intent.getExtras().get("data");
+            if(requestCode == REQUEST_CAPTURE){
+                capturedUri = photoURI;
 
-//                    BitmapFactory.Options options = new BitmapFactory.Options();
-//                    options.inSampleSize = 8;
-//                    Bitmap bit = loadBitmapFromMediaStoreBy(photoURI);
-//                    int height = bit.getHeight();
-//                    int width = bit.getWidth();
-//                    Bitmap bitmap = Bitmap.createScaledBitmap(bit, (width*118)/height, 118, true);
-//                    photoURI = null;
-
-                    //사진을 사진메모 생성 액티비티로 넘기기
-                    Intent createPictureMemo = new Intent(this, CreatePictureMemoActivity.class);
-                    if (bitmap != null) {
-                        createPictureMemo.putExtra("captured_image", bitmap);
-                    } else {
-                        Toast.makeText(this, "사진을 불러오는데 실패했습니다! 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
-                    }
-                    startActivity(createPictureMemo);
-//                }
+                //사진uri를 사진메모 생성 액티비티로 넘기기
+                Intent createPictureMemo = new Intent(this, CreatePictureMemoActivity.class);
+                createPictureMemo.putExtra("uri", capturedUri);
+                startActivity(createPictureMemo);
             }
         }
     }

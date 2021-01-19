@@ -12,12 +12,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 import org.jh.todomemo.R;
 
 public class CreatePictureMemoActivity extends AppCompatActivity {
     Toolbar cpm_toolbar;
     ImageView iv_captured;
     Bitmap bitmap;
+    Uri captured_uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +34,12 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
 
         //카메라에서 찍은 사진
         Intent intent = getIntent();
-        bitmap = intent.getParcelableExtra("captured_image");
+        captured_uri = intent.getParcelableExtra("uri");
 
-        iv_captured.setImageBitmap(bitmap);
+//        iv_captured.setImageBitmap(bitmap);
+        Glide.with(this)
+                .load(captured_uri)
+                .into(iv_captured);
     }
 
     //툴바에 옵션메뉴 추가하기
