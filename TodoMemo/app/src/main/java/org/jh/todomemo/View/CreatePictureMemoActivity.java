@@ -19,7 +19,6 @@ import org.jh.todomemo.R;
 public class CreatePictureMemoActivity extends AppCompatActivity {
     Toolbar cpm_toolbar;
     ImageView iv_captured;
-    Bitmap bitmap;
     Uri captured_uri;
 
     @Override
@@ -32,11 +31,11 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
 
         setSupportActionBar(cpm_toolbar);
 
-        //카메라에서 찍은 사진
+        //카메라에서 찍은 사진uri
         Intent intent = getIntent();
         captured_uri = intent.getParcelableExtra("uri");
 
-//        iv_captured.setImageBitmap(bitmap);
+        //찍은 사진을 이미지뷰에 삽입하기
         Glide.with(this)
                 .load(captured_uri)
                 .into(iv_captured);
