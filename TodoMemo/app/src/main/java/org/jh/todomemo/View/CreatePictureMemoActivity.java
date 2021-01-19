@@ -1,8 +1,10 @@
 package org.jh.todomemo.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -58,5 +60,27 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder IsSave = new AlertDialog.Builder(this);
+        IsSave.setTitle("그림메모 저장")
+              .setMessage("메모를 저장하시겠습니까?")
+              .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                  @Override
+                  public void onClick(DialogInterface dialog, int which) {
+                      //그림메모가 데이터베이스에 저장되는 기능
+                      return;
+                  }
+              })
+              .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                  @Override
+                  public void onClick(DialogInterface dialog, int which) {
+                      //그림메모를 저장하지 않고 액티비티 벗어나기
+                      finish();
+                  }
+              });
+        IsSave.show();
     }
 }
