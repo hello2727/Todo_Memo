@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +28,8 @@ import org.jh.todomemo.View.CreatePictureMemoActivity;
 import org.jh.todomemo.View.CreateWritingMemo;
 import org.jh.todomemo.View.main.list.MPicture;
 import org.jh.todomemo.View.main.list.MWriting;
+
+import java.io.File;
 import java.text.SimpleDateFormat;
 
 public class MainActivity extends AppCompatActivity {
@@ -122,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent capture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if(capture.resolveActivity(getPackageManager()) != null){
                     photoURI = createImageUri(newFileName(), "image/jpg");
+                    Log.d(" 주소", photoURI.toString());
                     capture.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                     startActivityForResult(capture, REQUEST_CAPTURE);
                 }
@@ -166,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
     //이미지 Uri 생성
     private Uri createImageUri(String filename, String mimeType) {
         ContentValues values = new ContentValues();
+
         values.put(MediaStore.Images.Media.DISPLAY_NAME, filename);
         values.put(MediaStore.Images.Media.MIME_TYPE, mimeType);
 
