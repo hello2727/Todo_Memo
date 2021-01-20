@@ -26,11 +26,24 @@
 </div>
 
 ### 글메모
-- 글메모 생성/특정 메모 상세보기/롱클릭 삭제/수정
+- 글메모 생성/특정 메모 상세보기/롱클릭 삭제/수정1. 글 수정/수정2. 제목, 내용 에디트텍스트가 빈칸이면 메모 자동 삭제
 <div>
   <img width="200" src="https://user-images.githubusercontent.com/43267195/105189494-5da17e80-5b78-11eb-88b0-fadcc840b9fb.gif">        
   <img width="200" src="https://user-images.githubusercontent.com/43267195/105190016-ed472d00-5b78-11eb-84b6-4bb3dce27b55.gif">      
   <img width="200" src="https://user-images.githubusercontent.com/43267195/105189744-9f322980-5b78-11eb-8f48-a1a55de3d0c8.gif">      
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/105190512-6a72a200-5b79-11eb-8666-f124cf20f7f9.gif"> 
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/105190644-9130d880-5b79-11eb-8ff6-3b020f9bda40.gif"> 
+</div>
+
+### 사진메모
+- 사진메모 버튼 누르면 켜지는 카메라
+<div>
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/105190927-dead4580-5b79-11eb-9c51-5aaf79b7616b.gif">          
+</div>
+
+- 사진찍으면 사진메모 생성 액티비티로 진입 및 이미지뷰에 찍은 이미지 삽입
+<div>
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/105191282-3ba8fb80-5b7a-11eb-9b29-918de10a298f.gif">          
 </div>
 
 환경설정
