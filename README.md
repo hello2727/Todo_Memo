@@ -51,10 +51,13 @@
   <img width="200" src="https://user-images.githubusercontent.com/43267195/105192008-0a7cfb00-5b7b-11eb-9657-f8cb7f5a9897.gif">          
 </div>
 
-- 찍은 사진 위에 펜메모 남기기(1. 펜색상 선택)
+- 찍은 사진 위에 펜메모 남기기(1. 펜색상 선택, n. 진행중...)
 <div>
-  <img width="200" src="https://user-images.githubusercontent.com/43267195/105192008-0a7cfb00-5b7b-11eb-9657-f8cb7f5a9897.gif">          
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/105192427-6c3d6500-5b7b-11eb-9cc2-423193da724a.gif">          
 </div>
+
+## 진행상황 알림
+글메모 기능 구현은 완성하였습니다. 사진메모 기능 구현을 진행하고 있는 상태입니다.
 
 ### 환경설정
 -----------------
