@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent capture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if(capture.resolveActivity(getPackageManager()) != null){
                     photoURI = createImageUri(newFileName(), "image/jpg");
-                    Log.d(" 주소", photoURI.toString());
                     capture.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                     startActivityForResult(capture, REQUEST_CAPTURE);
                 }
