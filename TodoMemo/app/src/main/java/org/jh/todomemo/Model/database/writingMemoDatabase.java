@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import org.jh.todomemo.Model.dao.writingMemoDao;
 import org.jh.todomemo.Model.entity.writingMemo;
 
-@Database(entities = {writingMemo.class}, version = 1)
+@Database(entities = {writingMemo.class}, version = 1, exportSchema = false)
 public abstract class writingMemoDatabase extends RoomDatabase {
     public abstract writingMemoDao writingMemoDao();
 

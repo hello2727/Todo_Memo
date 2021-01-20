@@ -53,4 +53,7 @@ dependencies {
     // Glide dependencies
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    //colorPicker
+    implementation 'com.azeesoft.lib.colorpicker:colorpicker:1.0.8@aar'
 }
