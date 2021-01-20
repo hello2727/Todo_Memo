@@ -46,7 +46,17 @@
   <img width="200" src="https://user-images.githubusercontent.com/43267195/105191282-3ba8fb80-5b7a-11eb-9b29-918de10a298f.gif">          
 </div>
 
-환경설정
+- 백프레스버튼 누르면 나오는 대화상자. "No"는 사진메모 생성 액티비티 나가기, "Yes"는 사진메모 저장(아직 구현 안하고 아무것도 안하는 것으로 대체)
+<div>
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/105192008-0a7cfb00-5b7b-11eb-9657-f8cb7f5a9897.gif">          
+</div>
+
+- 찍은 사진 위에 펜메모 남기기(1. 펜색상 선택)
+<div>
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/105192008-0a7cfb00-5b7b-11eb-9657-f8cb7f5a9897.gif">          
+</div>
+
+### 환경설정
 -----------------
 ### build.gradle(project)
 ```
