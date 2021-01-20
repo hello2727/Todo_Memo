@@ -9,14 +9,17 @@
 <div>
   <img width="200" src="https://user-images.githubusercontent.com/43267195/105188671-7d847280-5b77-11eb-9b31-35b24fa27e08.PNG"> 
 </div>
+
 - 글메모 탭
 <div>
   <img width="200" src="https://user-images.githubusercontent.com/43267195/83618657-b9a59b80-a5c5-11ea-8891-d44d63e641e1.jpg"> 
 </div>
+
 - 사진메모 탭
 <div>
   <img width="200" src="https://user-images.githubusercontent.com/43267195/83618629-ae527000-a5c5-11ea-9d7b-499fe15c024f.jpg">          
 </div>
+
 - 글메모 생성 버튼 및 사진 메모 생성 버튼
 <div>
   <img width="200" src="https://user-images.githubusercontent.com/43267195/105188505-52018800-5b77-11eb-93e4-d6f925bf3b96.gif">          
