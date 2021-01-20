@@ -7,14 +7,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -22,14 +20,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
-
 import org.jh.todomemo.R;
 import org.jh.todomemo.View.CreatePictureMemoActivity;
 import org.jh.todomemo.View.CreateWritingMemo;
 import org.jh.todomemo.View.main.list.MPicture;
 import org.jh.todomemo.View.main.list.MWriting;
-
-import java.io.File;
 import java.text.SimpleDateFormat;
 
 public class MainActivity extends AppCompatActivity {
@@ -170,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
     //이미지 Uri 생성
     private Uri createImageUri(String filename, String mimeType) {
         ContentValues values = new ContentValues();
-
         values.put(MediaStore.Images.Media.DISPLAY_NAME, filename);
         values.put(MediaStore.Images.Media.MIME_TYPE, mimeType);
 
