@@ -26,7 +26,12 @@
 </div>
 
 ### 글메모
-- 
+- 글메모 생성/특정 메모 상세보기/롱클릭 삭제/수정
+<div>
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/105189494-5da17e80-5b78-11eb-88b0-fadcc840b9fb.gif">        
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/105190016-ed472d00-5b78-11eb-84b6-4bb3dce27b55.gif">      
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/105189744-9f322980-5b78-11eb-8f48-a1a55de3d0c8.gif">      
+</div>
 
 환경설정
 -----------------
