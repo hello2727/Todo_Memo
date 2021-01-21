@@ -28,17 +28,20 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
     ImageView iv_captured;
     Uri captured_uri;
 
-    public static Context pictureContext;
+    //글씨 넣는데 필요한 요소
     PencilView pencilView;
+    LinearLayout container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_picture_memo);
-        pencilView = new PencilView(this);
-        addContentView(pencilView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
 
-        pictureContext = this;
+        //글씨 쓸 수 있는 뷰 추가
+        container = findViewById(R.id.cpm_container);
+        pencilView = new PencilView(CreatePictureMemoActivity.this);
+        container.addView(pencilView);
+
         cpm_toolbar = findViewById(R.id.cpm_toolbar);
         iv_captured = findViewById(R.id.cpm_iv_captured);
 
@@ -72,7 +75,10 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
                     @Override
                     public void onColorPicked(int color, String hexVal) {
                         //색상 선택했을 때
-                        Toast.makeText(CreatePictureMemoActivity.this, hexVal+Integer.toString(color), Toast.LENGTH_LONG).show();
+//                        if(pencilView != null){
+//                            container.removeView(pencilView);
+//                        }
+                        pencilView.setColor(color);
                     }
                 });
                 colorPickerDialog.show();

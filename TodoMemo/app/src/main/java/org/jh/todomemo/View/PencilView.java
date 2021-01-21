@@ -14,9 +14,14 @@ public class PencilView extends View {
 
     public PencilView(Context context) {
         super(context);
+
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(7f);
-        paint.setColor(Color.GREEN);
+        paint.setColor(Color.BLACK);
+    }
+
+    public void setColor(int color){
+        paint.setColor(color);
     }
 
     @Override
