@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.azeesoft.lib.colorpicker.ColorPickerDialog;
@@ -26,11 +28,17 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
     ImageView iv_captured;
     Uri captured_uri;
 
+    public static Context pictureContext;
+    PencilView pencilView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_picture_memo);
+        pencilView = new PencilView(this);
+        addContentView(pencilView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
 
+        pictureContext = this;
         cpm_toolbar = findViewById(R.id.cpm_toolbar);
         iv_captured = findViewById(R.id.cpm_iv_captured);
 
@@ -64,7 +72,7 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
                     @Override
                     public void onColorPicked(int color, String hexVal) {
                         //색상 선택했을 때
-                        Toast.makeText(CreatePictureMemoActivity.this, hexVal, Toast.LENGTH_LONG).show();
+                        Toast.makeText(CreatePictureMemoActivity.this, hexVal+Integer.toString(color), Toast.LENGTH_LONG).show();
                     }
                 });
                 colorPickerDialog.show();
