@@ -6,81 +6,67 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Point;
 import android.graphics.Rect;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import java.util.ArrayList;
+import androidx.annotation.Nullable;
 
-class Point{
-    float x;
-    float y;
-    int pValue; //손가락터치 상태
-    public Point(float x, float y, int value){
-        this.x = x;
-        this.y = y;
-        pValue = value;
-    }
-}
-class Scale{
-    int start, end, color; //DrawImage의 범위 및 색상
-    public Scale(int start, int end, int color){
-        this.start = start;
-        this.end = end;
-        this.color = color;
-    }
-}
+import java.util.ArrayList;
 
 public class PencilView extends View {
     Paint paint;
-    ArrayList<Point> arrP; //Point 클래스 저장.
-    ArrayList<Scale> arrS; //Scale 클래스 저장.
-    final int WAIT = -1;
-    final int START = 0; //터치상태(down)
-    final int MOVE = 1; //터치상태(move)
-    int value, color, reStart, reEnd; //터치상태 저장변수, drawimage 색상, drawimage의 시작값 대입변수, drawimage의 끝값 변수
+    Canvas mCanvas;
+    Bitmap mBitmap;
 
-    Bitmap bit;
+    float lastX;
+    float lastY;
 
     public PencilView(Context context) {
         super(context);
 
+        init(context);
+    }
+
+    public PencilView(Context context, @Nullable AttributeSet attrs, int lastX) {
+        super(context, attrs);
+
+        init(context);
+    }
+
+    public void init(Context context) {
         paint = new Paint();
-        arrP = new ArrayList<>();
-        arrS = new ArrayList<>();
-        color = Color.BLACK;
-        bit = null;
-//        paint.setColor(Color.BLACK);
+        paint.setColor(Color.BLACK);
+        paint.setStrokeWidth(7f);
+        paint.setStyle(Paint.Style.STROKE);
+
+        //이전 좌표값
+        lastX = -1;
+        lastY = -1;
+    }
+
+    //뷰에 사이즈가 정해졌을 때 만들어지는 함수(메모리에 비트맵 객체 하나 만들어줌)
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+
+        mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        mCanvas = new Canvas();
+        mCanvas.setBitmap(mBitmap);
+
+        mCanvas.drawColor(Color.TRANSPARENT);
     }
 
     public void setColor(int pickedColor){
-        color = pickedColor;
+        paint.setColor(pickedColor);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.TRANSPARENT);
-        reEnd = arrP.size();
-        arrS.add(new Scale(reStart, reEnd, color));
-
-        if(bit != null){
-            canvas.drawBitmap(bit, null, new Rect(0, 0, 600, 600), null);
-        }
-
-        for(int j = 0; j < arrS.size(); j++){
-            paint.setColor(arrS.get(j).color);
-            paint.setStrokeWidth(3f);
-
-            //arrS에 저장된 각 grawImage의 범위만큼만 loop 돌면서 image 그림.
-            for(int i = arrS.get(j).start; i < arrS.get(j).end; i++){
-                if(arrP.get(i).pValue == MOVE){
-                    canvas.drawLine(arrP.get(i-1).x, arrP.get(i-1).y, arrP.get(i).x, arrP.get(i).y, paint);
-                }
-
-                if(i == arrP.size() - 1){ //마지막에 그려진 drawimage의 끝 값이
-                    reStart = arrP.size(); //다음 drawimage의 처음 값으로 저장.
-                }
-            }
+        if (mBitmap != null) {
+            canvas.drawBitmap(mBitmap, 0, 0, null);
         }
     }
 
@@ -91,17 +77,32 @@ public class PencilView extends View {
 
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-                value = START;
-                arrP.add(new Point(x, y, value));
+                if (lastX != -1) {
+                    if (x != lastX || y != lastY) {
+                        mCanvas.drawLine(lastX, lastY, x, y, paint);
+                    }
+                }
+
+                //현재 값 넣어줌
+                lastX = x;
+                lastY = y;
                 break;
             case MotionEvent.ACTION_MOVE:
-                value = MOVE;
-                arrP.add(new Point(x, y, value));
-                invalidate();
+                if (lastX != -1) {
+                    mCanvas.drawLine(lastX, lastY, x, y, paint);
+                }
+
+                lastX = x;
+                lastY = y;
+
                 break;
             case MotionEvent.ACTION_UP:
+                lastX = -1;
+                lastY = -1;
                 break;
         }
-        return false;
+
+        invalidate();
+        return true;
     }
 }
