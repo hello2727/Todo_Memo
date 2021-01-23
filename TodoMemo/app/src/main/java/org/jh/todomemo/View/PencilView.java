@@ -30,7 +30,7 @@ public class PencilView extends View {
         init(context);
     }
 
-    public PencilView(Context context, @Nullable AttributeSet attrs, int lastX) {
+    public PencilView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
         init(context);
