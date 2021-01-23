@@ -18,11 +18,14 @@ import java.util.ArrayList;
 
 public class PencilView extends View {
     Paint paint;
+    Paint eraser;
     Canvas mCanvas;
     Bitmap mBitmap;
 
     float lastX;
     float lastY;
+
+    boolean IsEraserOn;
 
     public PencilView(Context context) {
         super(context);
@@ -41,6 +44,11 @@ public class PencilView extends View {
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(7f);
         paint.setStyle(Paint.Style.STROKE);
+
+        eraser = new Paint();
+        eraser.setColor(Color.TRANSPARENT);
+        eraser.setStrokeWidth(20f);
+        IsEraserOn = false;
 
         //이전 좌표값
         lastX = -1;

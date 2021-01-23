@@ -84,6 +84,14 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
                 colorPickerDialog.show();
                 
                 return true;
+            case R.id.scm_eraser:
+                //지우개 기능
+                if(pencilView.IsEraserOn){
+
+                }else{
+
+                }
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

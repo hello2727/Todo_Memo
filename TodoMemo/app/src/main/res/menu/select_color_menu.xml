@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/scm_eraser"
+        android:title="지우개"
+        android:icon="@drawable/eraser"
+        app:showAsAction="always" />
+
     <item android:id="@+id/scm_pickingColor"
         android:title="색상"
         android:icon="@drawable/picking_color"
