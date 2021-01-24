@@ -5,18 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-
-import java.util.ArrayList;
 
 public class PencilView extends View {
     Paint paint;
@@ -46,10 +41,13 @@ public class PencilView extends View {
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(7f);
         paint.setStyle(Paint.Style.STROKE);
+        paint.setAntiAlias(true);
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeCap(Paint.Cap.ROUND);
 
         eraser = new Paint();
         eraser.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-        eraser.setStrokeWidth(100f);
+        eraser.setStrokeWidth(200f);
         IsEraserOn = false;
 
         //이전 좌표값
