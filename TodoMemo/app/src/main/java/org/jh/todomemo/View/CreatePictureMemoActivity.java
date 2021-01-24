@@ -6,8 +6,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +22,8 @@ import com.bumptech.glide.Glide;
 
 import org.jh.todomemo.R;
 
+import java.io.IOException;
+
 public class CreatePictureMemoActivity extends AppCompatActivity {
     Toolbar cpm_toolbar;
     ImageView iv_captured;
@@ -28,24 +33,32 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
     PencilView pencilView;
     LinearLayout container;
 
+    Bitmap dataBitmap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_picture_memo);
 
+        //카메라에서 찍은 사진uri
+        Intent intent = getIntent();
+        captured_uri = intent.getParcelableExtra("uri");
+
         //글씨 쓸 수 있는 뷰 추가
         container = findViewById(R.id.cpm_container);
+//        try {
+//            dataBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), captured_uri);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         pencilView = new PencilView(CreatePictureMemoActivity.this);
+//        pencilView.setImageData(dataBitmap);
         container.addView(pencilView);
 
         cpm_toolbar = findViewById(R.id.cpm_toolbar);
         iv_captured = findViewById(R.id.cpm_iv_captured);
 
         setSupportActionBar(cpm_toolbar);
-
-        //카메라에서 찍은 사진uri
-        Intent intent = getIntent();
-        captured_uri = intent.getParcelableExtra("uri");
 
         //찍은 사진을 이미지뷰에 삽입하기
         Glide.with(this)

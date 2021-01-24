@@ -2,16 +2,23 @@ package org.jh.todomemo.View;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.net.Uri;
+import android.nfc.Tag;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+
+import org.jh.todomemo.R;
 
 public class PencilView extends View {
     Paint paint;
@@ -23,6 +30,16 @@ public class PencilView extends View {
     float lastY;
 
     boolean IsEraserOn;
+
+//    float bitmapCenterX;
+//    float bitmapCenterY;
+//    Bitmap sourceBitmap;
+//    float sourceWidth = 0.0F;
+//    float sourceHeight = 0.0F;
+//    float displayWidth = 0.0F;
+//    float displayHeight = 0.0F;
+//    int displayCenterX = 0;
+//    int displayCenterY = 0;
 
     public PencilView(Context context) {
         super(context);
@@ -60,16 +77,57 @@ public class PencilView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        mCanvas = new Canvas();
-        mCanvas.setBitmap(mBitmap);
+//        if(w > 0 && h > 0) {
+            mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+            mCanvas = new Canvas();
+            mCanvas.setBitmap(mBitmap);
+            mCanvas.drawColor(Color.TRANSPARENT);
 
-        mCanvas.drawColor(Color.TRANSPARENT);
+//            displayWidth = (float) w;
+//            displayHeight = (float) h;
+//
+//            displayCenterX = w / 2;
+//            displayCenterY = h / 2;
+//        }
+
+//        redraw(); //초기화(새로 그려주기)
     }
 
     public void setColor(int pickedColor){
         paint.setColor(pickedColor);
     }
+
+//    public void setImageData(Bitmap image){
+//        if(sourceBitmap != null){
+//            sourceBitmap.recycle(); //비트맵 객체 해제
+//        }
+//
+//        sourceBitmap = image;
+//
+//        sourceWidth = sourceBitmap.getWidth();
+//        sourceHeight = sourceBitmap.getHeight();
+//
+//        bitmapCenterX = sourceBitmap.getWidth()/2;
+//        bitmapCenterY = sourceBitmap.getHeight()/2;
+//    }
+
+//    public void redraw() {
+//        if (sourceBitmap == null) {
+//            Log.d("어쩌면", "sourceBitmap is null in redraw().");
+//            return;
+//        }
+//
+//        float originX = (displayWidth - (float)sourceBitmap.getWidth()) / 2.0F;
+//        float originY = (displayHeight - (float)sourceBitmap.getHeight()) / 2.0F;
+//
+//        mCanvas.translate(originX, originY);
+//
+//        Matrix matrix = new Matrix();
+//        Bitmap capturedBitmap = Bitmap.createBitmap(sourceBitmap, 0, 0, sourceBitmap.getWidth(), sourceBitmap.getHeight(), matrix, false);
+//        mCanvas.drawBitmap(capturedBitmap, matrix, paint);
+//
+//        invalidate();
+//    }
 
     @Override
     protected void onDraw(Canvas canvas) {
