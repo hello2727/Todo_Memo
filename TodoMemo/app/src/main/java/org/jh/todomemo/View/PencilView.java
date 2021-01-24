@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -46,8 +48,8 @@ public class PencilView extends View {
         paint.setStyle(Paint.Style.STROKE);
 
         eraser = new Paint();
-        eraser.setColor(Color.TRANSPARENT);
-        eraser.setStrokeWidth(20f);
+        eraser.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        eraser.setStrokeWidth(100f);
         IsEraserOn = false;
 
         //이전 좌표값
@@ -87,7 +89,11 @@ public class PencilView extends View {
             case MotionEvent.ACTION_DOWN:
                 if (lastX != -1) {
                     if (x != lastX || y != lastY) {
-                        mCanvas.drawLine(lastX, lastY, x, y, paint);
+                        if(IsEraserOn){
+                            mCanvas.drawLine(lastX, lastY, x, y, eraser);
+                        }else{
+                            mCanvas.drawLine(lastX, lastY, x, y, paint);
+                        }
                     }
                 }
 
@@ -97,7 +103,11 @@ public class PencilView extends View {
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (lastX != -1) {
-                    mCanvas.drawLine(lastX, lastY, x, y, paint);
+                    if(IsEraserOn){
+                        mCanvas.drawLine(lastX, lastY, x, y, eraser);
+                    }else{
+                        mCanvas.drawLine(lastX, lastY, x, y, paint);
+                    }
                 }
 
                 lastX = x;

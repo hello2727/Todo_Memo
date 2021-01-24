@@ -69,15 +69,13 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.scm_pickingColor:
+                //지우개 기능 Off
+                pencilView.IsEraserOn = false;
                 //팔레트 등장
                 ColorPickerDialog colorPickerDialog = ColorPickerDialog.createColorPickerDialog(this);
                 colorPickerDialog.setOnColorPickedListener(new ColorPickerDialog.OnColorPickedListener() {
                     @Override
                     public void onColorPicked(int color, String hexVal) {
-                        //색상 선택했을 때
-//                        if(pencilView != null){
-//                            container.removeView(pencilView);
-//                        }
                         pencilView.setColor(color);
                     }
                 });
@@ -85,12 +83,8 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
                 
                 return true;
             case R.id.scm_eraser:
-                //지우개 기능
-                if(pencilView.IsEraserOn){
-
-                }else{
-
-                }
+                //지우개 기능 On
+                pencilView.IsEraserOn = true;
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
