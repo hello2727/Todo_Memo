@@ -27,6 +27,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cpm_pictureMemo"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
@@ -44,6 +45,7 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
     //글씨 넣는데 필요한 요소
     PencilView pencilView;
     LinearLayout container;
+    ConstraintLayout pictureMemo;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -68,6 +70,7 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
 
         cpm_toolbar = findViewById(R.id.cpm_toolbar);
         iv_captured = findViewById(R.id.cpm_iv_captured);
+        pictureMemo = findViewById(R.id.cpm_pictureMemo);
 
         setSupportActionBar(cpm_toolbar);
 
@@ -164,25 +167,14 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
             file.mkdirs();
         }
 
-        container.buildDrawingCache();
-        Bitmap bitmap = container.getDrawingCache();
+        pictureMemo.buildDrawingCache();
+        Bitmap bitmap = pictureMemo.getDrawingCache();
         FileOutputStream fos;
         try {
             fos = new FileOutputStream(savePath + "/" + filename);
             bitmap.compress(Bitmap.CompressFormat.PNG, 80, fos);
-
-            Toast.makeText(this, "사진메모를 저장하였습니다.", Toast.LENGTH_SHORT);
         } catch (Exception e) {
-            Toast.makeText(this, "사진메모 저장에 실패하였습니다.", Toast.LENGTH_SHORT);
             e.printStackTrace();
         }
-
-//        File storageDir = new File(Environment.getExternalStorageDirectory().toString(), "todoMemo/");
-//        storageDir.mkdirs();
-//        File image = File.createTempFile(
-//              filename,
-//              ".jpg",
-//              storageDir
-//        );
     }
 }
