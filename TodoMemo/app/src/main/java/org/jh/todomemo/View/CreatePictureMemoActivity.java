@@ -1,28 +1,40 @@
 package org.jh.todomemo.View;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.azeesoft.lib.colorpicker.ColorPickerDialog;
 import com.bumptech.glide.Glide;
 
 import org.jh.todomemo.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 public class CreatePictureMemoActivity extends AppCompatActivity {
     Toolbar cpm_toolbar;
@@ -33,8 +45,7 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
     PencilView pencilView;
     LinearLayout container;
 
-    Bitmap dataBitmap;
-
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +75,9 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(captured_uri)
                 .into(iv_captured);
+
+        //사진저장 권한체크
+        checkPermission();
     }
 
     //툴바에 옵션메뉴 추가하기
@@ -108,8 +122,9 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
               .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                   @Override
                   public void onClick(DialogInterface dialog, int which) {
-                      //그림메모가 데이터베이스에 저장되는 기능
-                      return;
+                      /* 사진메모가 데이터베이스에 저장되는 기능
+                      * 1. 사진메모를 갤러리에 저장 */
+                      savePictureMemo();
                   }
               })
               .setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -120,5 +135,54 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
                   }
               });
         IsSave.show();
+    }
+
+    //폴더생성 + 사진저장 권한체크
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void checkPermission() {
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
+    }
+
+    // 새파일 이름 생성
+    private String newFileName(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String filename = sdf.format(System.currentTimeMillis());
+
+        return filename + ".png";
+    }
+
+    //사진메모를 비트맵 형태로 스마트폰 갤러리에 저장하기
+    private void savePictureMemo(){
+        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        String savePath = path + "/todoMemo";
+        String filename = "momo" + newFileName();
+        File file = new File(savePath);
+
+        if(!file.isDirectory()){
+            file.mkdirs();
+        }
+
+        container.buildDrawingCache();
+        Bitmap bitmap = container.getDrawingCache();
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(savePath + "/" + filename);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 80, fos);
+
+            Toast.makeText(this, "사진메모를 저장하였습니다.", Toast.LENGTH_SHORT);
+        } catch (Exception e) {
+            Toast.makeText(this, "사진메모 저장에 실패하였습니다.", Toast.LENGTH_SHORT);
+            e.printStackTrace();
+        }
+
+//        File storageDir = new File(Environment.getExternalStorageDirectory().toString(), "todoMemo/");
+//        storageDir.mkdirs();
+//        File image = File.createTempFile(
+//              filename,
+//              ".jpg",
+//              storageDir
+//        );
     }
 }
