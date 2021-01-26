@@ -59,13 +59,7 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
 
         //글씨 쓸 수 있는 뷰 추가
         container = findViewById(R.id.cpm_container);
-//        try {
-//            dataBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), captured_uri);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         pencilView = new PencilView(CreatePictureMemoActivity.this);
-//        pencilView.setImageData(dataBitmap);
         container.addView(pencilView);
 
         cpm_toolbar = findViewById(R.id.cpm_toolbar);
