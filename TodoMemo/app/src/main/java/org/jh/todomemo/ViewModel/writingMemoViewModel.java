@@ -13,7 +13,7 @@ import java.util.List;
 /* UI에 데이터를 제공하고 변경된 사항들을 업데이트 */
 public class writingMemoViewModel extends AndroidViewModel {
     //Repository 클래스에서 필요한 부분을 ViewModel에 연결.
-    //- word리스트 불러오기, word insert하기 부분
+    //- memo리스트 불러오기, memo insert하기 부분
     private writingMemoRepository mwritingMemoRepository;
 
     private LiveData<List<writingMemo>> mAllWritingMemos;

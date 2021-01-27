@@ -29,12 +29,12 @@ public class pictureMemoRepository {
     }
 
     //메모를 추가하는 함수
-    public void insert(pictureMemo pictureMemo){
+    public void insert_picture(pictureMemo pictureMemo){
         new insertAsyncTask(mPictureMemoDao).execute(pictureMemo);
     }
 
     //리사이클러뷰 어댑터 선언된 곳에서 메모를 삭제하는 함수
-    public void delete(pictureMemo pictureMemo) {
+    public void delete_picture(pictureMemo pictureMemo) {
         new deleteAsyncTask(mPictureMemoDao).execute(pictureMemo);
     }
 

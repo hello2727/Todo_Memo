@@ -9,14 +9,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jh.todomemo.Model.entity.pictureMemo;
 import org.jh.todomemo.View.listener.OnPictureItemClickListener;
 import org.jh.todomemo.R;
-import org.jh.todomemo.data.PictureConstructure;
 
 import java.util.ArrayList;
 
 public class PictureConstructureAdapter extends RecyclerView.Adapter<PictureConstructureAdapter.ViewHolder> implements OnPictureItemClickListener {
-    ArrayList<PictureConstructure> items = new ArrayList<PictureConstructure>();
+    ArrayList<pictureMemo> items = new ArrayList<pictureMemo>();
 
     OnPictureItemClickListener listener;
 
@@ -31,7 +31,7 @@ public class PictureConstructureAdapter extends RecyclerView.Adapter<PictureCons
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        PictureConstructure item = items.get(position);
+        pictureMemo item = items.get(position);
         viewHolder.setItem(item);
     }
 
@@ -40,19 +40,19 @@ public class PictureConstructureAdapter extends RecyclerView.Adapter<PictureCons
         return items.size();
     }
 
-    public void addItem(PictureConstructure item) {
+    public void addItem(pictureMemo item) {
         items.add(item);
     }
 
-    public void setItems(ArrayList<PictureConstructure> items) {
+    public void setItems(ArrayList<pictureMemo> items) {
         this.items = items;
     }
 
-    public PictureConstructure getItem(int position) {
+    public pictureMemo getItem(int position) {
         return items.get(position);
     }
 
-    public void setItem(int position, PictureConstructure item) {
+    public void setItem(int position, pictureMemo item) {
         items.set(position, item);
     }
 
@@ -92,10 +92,8 @@ public class PictureConstructureAdapter extends RecyclerView.Adapter<PictureCons
 
         }
 
-        public void setItem(PictureConstructure item) {
-            picture.setImageResource(item.getPicture());
-            ptitle.setText(item.getPtitle());
-            pcontents.setText(item.getPcontents());
+        public void setItem(pictureMemo item) {
+            picture.setImageResource(item.getPictureContent());
         }
     }
 }
