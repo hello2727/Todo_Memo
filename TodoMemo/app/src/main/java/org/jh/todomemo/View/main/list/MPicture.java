@@ -12,13 +12,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import org.jh.todomemo.R;
-import org.jh.todomemo.View.adapter.PictureConstructureAdapter;
+import org.jh.todomemo.View.adapter.PictureMemoRecyclerViewAdapter;
 import org.jh.todomemo.data.PictureConstructure;
 import org.jh.todomemo.View.listener.OnPictureItemClickListener;
 
 public class MPicture extends Fragment {
     RecyclerView recyclerView;
-    PictureConstructureAdapter adapter;
+    PictureMemoRecyclerViewAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class MPicture extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new PictureConstructureAdapter();
+        adapter = new PictureMemoRecyclerViewAdapter();
 
         adapter.addItem(new PictureConstructure(R.drawable.pleasepicture, "첫글", "안녕하세요"));
 
@@ -36,7 +36,7 @@ public class MPicture extends Fragment {
 
         adapter.setOnItemClickListener(new OnPictureItemClickListener() {
             @Override
-            public void onItemClick(PictureConstructureAdapter.ViewHolder holder, View view, int position) {
+            public void onItemClick(PictureMemoRecyclerViewAdapter.ViewHolder holder, View view, int position) {
                 PictureConstructure item = (PictureConstructure) adapter.getItem(position);
                 Toast.makeText(getContext(), item.getPtitle(), Toast.LENGTH_SHORT).show();
             }

@@ -2,8 +2,9 @@ package org.jh.todomemo.View.listener;
 
 import android.view.View;
 
-import org.jh.todomemo.View.adapter.PictureConstructureAdapter;
+import org.jh.todomemo.View.adapter.PictureMemoRecyclerViewAdapter;
 
 public interface OnPictureItemClickListener {
-    public void onItemClick(PictureConstructureAdapter.ViewHolder holder, View view, int position);
+    void onItemClick(PictureMemoRecyclerViewAdapter.ViewHolder holder, View view, int position);
+    void onItemLongClick(PictureMemoRecyclerViewAdapter.ViewHolder holder, View view, int position);
 }
