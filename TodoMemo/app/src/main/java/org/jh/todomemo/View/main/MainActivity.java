@@ -12,7 +12,6 @@ import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +27,8 @@ import org.jh.todomemo.View.CreatePictureMemoActivity;
 import org.jh.todomemo.View.CreateWritingMemo;
 import org.jh.todomemo.View.main.list.MPicture;
 import org.jh.todomemo.View.main.list.MWriting;
+import org.jh.todomemo.util.MySharedPreferences;
+
 import java.text.SimpleDateFormat;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,11 +45,15 @@ public class MainActivity extends AppCompatActivity {
     Animation fab_open, fab_close, fab_clockwise, fab_anticlockwise;
     Boolean isFabOpen = false;
 
+    MySharedPreferences mySharedPreferences;
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mySharedPreferences = new MySharedPreferences();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -208,5 +213,12 @@ public class MainActivity extends AppCompatActivity {
             fab2.setClickable(false);
             isFabOpen = false;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //사진메모 데이터 삭제하기
+        mySharedPreferences.clearMemoData(this);
     }
 }

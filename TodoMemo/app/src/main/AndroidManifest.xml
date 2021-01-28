@@ -2,25 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="org.jh.todomemo">
-
-    <!--원본 크기의 사진 저장-->
+    <!-- 원본 크기의 사진 저장 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-<!--    <uses-feature android:name="android.hardware.camera2.full"-->
-<!--        android:required="true" />-->
 
     <application
         android:allowBackup="false"
         android:fullBackupOnly="false"
-        tools:replace="android:allowBackup"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:requestLegacyExternalStorage="true" >
-        <activity android:name=".View.CreatePictureMemoActivity"></activity>
+        tools:replace="android:allowBackup">
+        <activity android:name=".View.SubPreviewPicture"></activity>
+        <activity android:name=".View.CreatePictureMemoActivity" />
         <activity android:name=".View.CreateWritingMemo" />
         <activity android:name=".View.SubPreviewWriting" />
         <activity android:name=".View.main.MainActivity">
