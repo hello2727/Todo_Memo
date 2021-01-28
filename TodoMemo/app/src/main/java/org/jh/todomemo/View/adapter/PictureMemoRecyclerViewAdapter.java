@@ -14,8 +14,6 @@ import com.bumptech.glide.Glide;
 import org.jh.todomemo.Model.entity.pictureMemo;
 import org.jh.todomemo.View.listener.OnPictureItemClickListener;
 import org.jh.todomemo.R;
-import org.jh.todomemo.View.listener.OnWritingItemClickListener;
-
 import java.util.List;
 
 public class PictureMemoRecyclerViewAdapter extends RecyclerView.Adapter<PictureMemoRecyclerViewAdapter.ViewHolder> implements OnPictureItemClickListener {
@@ -53,9 +51,11 @@ public class PictureMemoRecyclerViewAdapter extends RecyclerView.Adapter<Picture
 //            pictureContent.setImageBitmap(pMemo.getPictureContent()); //방법1
 
             //blob -> bitmap으로 변환함수 필요
-            Glide.with(itemView) //방법2
-                 .load(pMemo.getPictureContent())
-                 .into(pictureContent);
+//            Glide.with(itemView) //방법2
+//                 .load(pMemo.getPictureContent())
+//                 .into(pictureContent);
+
+            pictureContent.setImageResource(pMemo.getPictureContent()); //임시
         }
     }
 
@@ -83,6 +83,8 @@ public class PictureMemoRecyclerViewAdapter extends RecyclerView.Adapter<Picture
 //            Glide.with(itemView) //방법2
 //                 .load(current.getPictureContent())
 //                 .into(holder.pictureContent);
+
+            holder.pictureContent.setImageResource(current.getPictureContent()); //임시
         }else{
             holder.pictureContent.setImageResource(R.drawable.pleasepicture);
         }

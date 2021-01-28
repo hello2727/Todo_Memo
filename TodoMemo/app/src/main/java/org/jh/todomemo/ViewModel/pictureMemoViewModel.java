@@ -23,7 +23,7 @@ public class pictureMemoViewModel extends AndroidViewModel {
         mAllPictureMemos = mpictureMemoReposiory.getAllPictureMemos();
     }
 
-    public LiveData<List<pictureMemo>> getmAllPictureMemos() {
+    public LiveData<List<pictureMemo>> getAllPictureMemos() {
         return mAllPictureMemos;
     }
 

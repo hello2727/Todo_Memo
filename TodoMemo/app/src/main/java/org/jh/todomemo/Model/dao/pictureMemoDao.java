@@ -1,6 +1,7 @@
 package org.jh.todomemo.Model.dao;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -11,6 +12,7 @@ import org.jh.todomemo.Model.entity.pictureMemo;
 
 import java.util.List;
 
+@Dao
 public interface pictureMemoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertPictureMemos(pictureMemo pictureMemos);

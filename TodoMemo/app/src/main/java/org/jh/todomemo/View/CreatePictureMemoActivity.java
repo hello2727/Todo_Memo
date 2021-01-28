@@ -154,7 +154,7 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
     private void savePictureMemo(){
         File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         String savePath = path + "/todoMemo";
-        String filename = "momo" + newFileName();
+        String filename = "memo" + "_" + newFileName();
         File file = new File(savePath);
 
         if(!file.isDirectory()){

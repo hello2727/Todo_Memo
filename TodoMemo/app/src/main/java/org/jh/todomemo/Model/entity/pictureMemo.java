@@ -12,7 +12,8 @@ public class pictureMemo {
     public int ID;
 
     @ColumnInfo(name = "picture_content")
-    public Blob pictureContent;
+//    public Blob pictureContent;
+    public int pictureContent;
 
     public int getID() {
         return ID;
@@ -22,11 +23,19 @@ public class pictureMemo {
         this.ID = ID;
     }
 
-    public Blob getPictureContent() {
+//    public Blob getPictureContent() {
+//        return pictureContent;
+//    }
+//
+//    public void setPictureContent(Blob pictureContent) {
+//        this.pictureContent = pictureContent;
+//    }
+
+    public int getPictureContent() {
         return pictureContent;
     }
 
-    public void setPictureContent(Blob pictureContent) {
+    public void setPictureContent(int pictureContent) {
         this.pictureContent = pictureContent;
     }
 }
