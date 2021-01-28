@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import org.jh.todomemo.Model.dao.pictureMemoDao;
 import org.jh.todomemo.Model.entity.pictureMemo;
 
-@Database(entities = {pictureMemo.class}, version = 1, exportSchema = false)
+@Database(entities = {pictureMemo.class}, version = 2, exportSchema = false)
 public abstract class pictureMemoDatabase extends RoomDatabase {
     public abstract pictureMemoDao pictureMemoDao();
 
@@ -24,6 +24,7 @@ public abstract class pictureMemoDatabase extends RoomDatabase {
                     //데이터베이스 생성부분
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             pictureMemoDatabase.class, "pictureMemo_database")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

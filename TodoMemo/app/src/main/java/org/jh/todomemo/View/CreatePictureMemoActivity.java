@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.Manifest;
 import android.content.Context;
@@ -29,10 +30,15 @@ import android.widget.Toast;
 
 import com.azeesoft.lib.colorpicker.ColorPickerDialog;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.util.Util;
 
+import org.jh.todomemo.Model.entity.pictureMemo;
 import org.jh.todomemo.R;
+import org.jh.todomemo.ViewModel.pictureMemoViewModel;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -46,6 +52,8 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
     PencilView pencilView;
     LinearLayout container;
     ConstraintLayout pictureMemo;
+
+    pictureMemoViewModel mpictureMemoViewModel;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -65,6 +73,9 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
         cpm_toolbar = findViewById(R.id.cpm_toolbar);
         iv_captured = findViewById(R.id.cpm_iv_captured);
         pictureMemo = findViewById(R.id.cpm_pictureMemo);
+
+        //Model Provider
+        mpictureMemoViewModel = ViewModelProviders.of(this).get(pictureMemoViewModel.class);
 
         setSupportActionBar(cpm_toolbar);
 
@@ -120,8 +131,10 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
                   @Override
                   public void onClick(DialogInterface dialog, int which) {
                       /* 사진메모가 데이터베이스에 저장되는 기능
-                      * 1. 사진메모를 갤러리에 저장 */
+                      * 1. 사진메모를 데이터베이스에 저장
+                      * 2. 사진메모 생성 액티비티 종료 */
                       savePictureMemo();
+                      finish();
                   }
               })
               .setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -150,25 +163,35 @@ public class CreatePictureMemoActivity extends AppCompatActivity {
         return filename + ".png";
     }
 
-    //사진메모를 비트맵 형태로 스마트폰 갤러리에 저장하기
+    //사진메모를 데이터베이스에 저장하기
     private void savePictureMemo(){
-        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        String savePath = path + "/todoMemo";
-        String filename = "memo" + "_" + newFileName();
-        File file = new File(savePath);
-
-        if(!file.isDirectory()){
-            file.mkdirs();
-        }
-
         pictureMemo.buildDrawingCache();
         Bitmap bitmap = pictureMemo.getDrawingCache();
-        FileOutputStream fos;
-        try {
-            fos = new FileOutputStream(savePath + "/" + filename);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 80, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        //데이터베이스에 저장하기
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 80, stream);
+        byte[] imageToByte = stream.toByteArray();
+
+        pictureMemo mpictureMemo = new pictureMemo(imageToByte);
+        mpictureMemoViewModel.insert_picture(mpictureMemo);
+
+//        //스마트폰 갤러리에 저장하기
+//        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+//        String savePath = path + "/todoMemo";
+//        String filename = "memo" + "_" + newFileName();
+//        File file = new File(savePath);
+//
+//        if(!file.isDirectory()){
+//            file.mkdirs();
+//        }
+
+//        FileOutputStream fos;
+//        try {
+//            fos = new FileOutputStream(savePath + "/" + filename);
+//            bitmap.compress(Bitmap.CompressFormat.PNG, 80, fos);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }

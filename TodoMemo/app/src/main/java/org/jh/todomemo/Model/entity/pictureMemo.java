@@ -4,16 +4,13 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.sql.Blob;
-
 @Entity(tableName = "pictureMemo_table")
 public class pictureMemo {
     @PrimaryKey(autoGenerate = true)
     public int ID;
 
     @ColumnInfo(name = "picture_content")
-//    public Blob pictureContent;
-    public int pictureContent;
+    public byte[] pictureContent;
 
     public int getID() {
         return ID;
@@ -23,19 +20,15 @@ public class pictureMemo {
         this.ID = ID;
     }
 
-//    public Blob getPictureContent() {
-//        return pictureContent;
-//    }
-//
-//    public void setPictureContent(Blob pictureContent) {
-//        this.pictureContent = pictureContent;
-//    }
+    public pictureMemo(byte[] pictureContent){
+        this.pictureContent = pictureContent;
+    }
 
-    public int getPictureContent() {
+    public byte[] getPictureContent() {
         return pictureContent;
     }
 
-    public void setPictureContent(int pictureContent) {
+    public void setPictureContent(byte[] pictureContent) {
         this.pictureContent = pictureContent;
     }
 }

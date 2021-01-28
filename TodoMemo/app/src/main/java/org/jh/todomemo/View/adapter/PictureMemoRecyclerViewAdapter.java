@@ -1,6 +1,8 @@
 package org.jh.todomemo.View.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,12 +52,11 @@ public class PictureMemoRecyclerViewAdapter extends RecyclerView.Adapter<Picture
         public void setItem(pictureMemo pMemo) {
 //            pictureContent.setImageBitmap(pMemo.getPictureContent()); //방법1
 
-            //blob -> bitmap으로 변환함수 필요
-//            Glide.with(itemView) //방법2
-//                 .load(pMemo.getPictureContent())
-//                 .into(pictureContent);
-
-            pictureContent.setImageResource(pMemo.getPictureContent()); //임시
+            byte[] bitImg = pMemo.getPictureContent();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bitImg, 0, bitImg.length);
+            Glide.with(itemView) //방법2
+                 .load(bitmap)
+                 .into(pictureContent);
         }
     }
 
@@ -78,13 +79,15 @@ public class PictureMemoRecyclerViewAdapter extends RecyclerView.Adapter<Picture
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if(mPictureMemos != null){
             pictureMemo current = mPictureMemos.get(position);
-//            holder.pictureContent.setImageBitmap(current.getPictureContent()); //방법1
+
+            //방법1
+            byte[] bitImg = current.getPictureContent();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bitImg, 0, bitImg.length);
+            holder.pictureContent.setImageBitmap(bitmap);
 
 //            Glide.with(itemView) //방법2
 //                 .load(current.getPictureContent())
 //                 .into(holder.pictureContent);
-
-            holder.pictureContent.setImageResource(current.getPictureContent()); //임시
         }else{
             holder.pictureContent.setImageResource(R.drawable.pleasepicture);
         }
