@@ -25,7 +25,7 @@ Android, Java, Glide, MVVM(Model-View-ViewModel), RoomDB, RxJava, lifecycle, Sha
 
 - 사진메모 탭
 <div>
-  <img width="200" src="https://user-images.githubusercontent.com/43267195/83618629-ae527000-a5c5-11ea-9d7b-499fe15c024f.jpg">          
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/106307688-fd5ebb00-62a2-11eb-98e4-671195ba9a2d.PNG">          
 </div>
 
 - 글메모 생성 버튼 및 사진 메모 생성 버튼
@@ -54,15 +54,31 @@ Android, Java, Glide, MVVM(Model-View-ViewModel), RoomDB, RxJava, lifecycle, Sha
   <img width="200" src="https://user-images.githubusercontent.com/43267195/105191282-3ba8fb80-5b7a-11eb-9b29-918de10a298f.gif">          
 </div>
 
-- 백프레스버튼 누르면 나오는 대화상자. "No"는 사진메모 생성 액티비티 나가기, "Yes"는 사진메모 저장(아직 구현 안하고 아무것도 안하는 것으로 대체)
+- 백프레스버튼 누르면 나오는 대화상자. "No"는 사진메모 생성 액티비티 나가기, "Yes"는 사진메모 저장
 <div>
-  <img width="200" src="https://user-images.githubusercontent.com/43267195/105192008-0a7cfb00-5b7b-11eb-9657-f8cb7f5a9897.gif">          
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/105192008-0a7cfb00-5b7b-11eb-9657-f8cb7f5a9897.gif">    
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/106306153-fdf65200-62a0-11eb-982b-c33d5622563a.gif"> 
 </div>
 
-- 찍은 사진 위에 펜메모 남기기(1. 펜색상 선택, n. 진행중...)
+- 찍은 사진 위에 펜메모 남기기(1. 펜색상 선택하고 그리기, 2. 다른 펜색상 선택 및 그리기<색 구분되어 그려짐>, 3. 지우개 기능, 4. 저장)
 <div>
-  <img width="200" src="https://user-images.githubusercontent.com/43267195/105192427-6c3d6500-5b7b-11eb-9cc2-423193da724a.gif">          
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/106306770-d784e680-62a1-11eb-813c-ab40a88218d8.gif">       
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/106307058-36e2f680-62a2-11eb-8ea3-7979a5c85fcf.gif">    
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/106307272-7f021900-62a2-11eb-8766-79dc175512ca.gif">  
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/106307387-a48f2280-62a2-11eb-9ab8-9e3966948093.gif">  
 </div>
+
+- 롱클릭 후 사진 메모 삭제. "예"는 사진메모 삭제, "아니오"는 그냥 return
+<div>
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/106307925-52023600-62a3-11eb-8269-4ec18270c7d7.gif">    
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/106308222-be7d3500-62a3-11eb-9a34-759133716590.gif">  
+</div>
+
+- 특정 사진 메모 상세보기
+<div>
+  <img width="200" src="https://user-images.githubusercontent.com/43267195/106309034-e7ea9080-62a4-11eb-981c-b6837ad92e08.gif">    
+</div>
+
 
 ### 환경설정
 -----------------
