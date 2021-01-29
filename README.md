@@ -2,7 +2,7 @@
 ==============
 >글 메모와 사진/손필기 메모가 가능한 메모장
 
-사용 기술
+사용 기술스택
 -----------------
 Android, Java, Glide, MVVM(Model-View-ViewModel), RoomDB, RxJava, ColorPicker
 
