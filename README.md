@@ -4,7 +4,7 @@
 
 사용 기술스택
 -----------------
-Android, Java, Glide, MVVM(Model-View-ViewModel), RoomDB, RxJava, ColorPicker
+Android, Java, Glide, MVVM(Model-View-ViewModel), RoomDB, RxJava, lifecycle, SharedPreferences, ColorPicker
 
 진행상황 알림
 -----------------
