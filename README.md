@@ -6,10 +6,6 @@
 -----------------
 Android, Java, Glide, MVVM(Model-View-ViewModel), RoomDB, RxJava, lifecycle, SharedPreferences, ColorPicker
 
-진행상황 알림
------------------
-글메모와 사진메모 기능 모두 구현을 완성하였습니다(98% 완성). UI 수정중에 있습니다.
-
 결과물
 -----------------
 ### 전체적인 구성
