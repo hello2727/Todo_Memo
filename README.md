@@ -117,11 +117,13 @@ implementation 'androidx.appcompat:appcompat:1.1.0'
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     
-    //백업설정 취소
     <application
+        //백업설정 취소
         android:allowBackup="false"
         android:fullBackupOnly="false"
         tools:replace="android:allowBackup"
+        //db 설정
+        android:requestLegacyExternalStorage="true"
         ...>
     
     //상단 탭 폰트 설정
