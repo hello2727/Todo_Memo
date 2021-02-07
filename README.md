@@ -78,7 +78,7 @@
 
 ### 환경설정
 -----------------
-### build.gradle(project)
+- build.gradle(project)
 ```
     repositories {
         google()
@@ -88,7 +88,7 @@
         maven {url 'https://dl.bintray.com/azeesoft/maven'}
     }
 ```
-### build.gradle(module)
+- build.gradle(module)
 ```
 implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
