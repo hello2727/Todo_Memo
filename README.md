@@ -4,7 +4,8 @@
 
 앱스토어 등록여부
 -----------------
-* O
+* 등록됨
+* 주소: https://play.google.com/store/apps/details?id=org.jh.todomemo
 
 개발환경
 -----------------
