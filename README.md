@@ -2,6 +2,10 @@
 ==============
 >글 메모와 사진/손필기 메모가 가능한 메모장
 
+앱스토어 등록여부
+-----------------
+* O
+
 개발환경
 -----------------
 * Android Java Glide MVVM(Model-View-ViewModel) RoomDB RxJava lifecycle Camera SharedPreferences ColorPicker
